@@ -94,10 +94,10 @@ public class LibraryManagementSystemApplication {
         return foundIndex;
     }
 
-    static boolean checkBookReturnDeadline(String patronName){
+    static boolean checkBookReturnDeadline(String patronID){
         boolean isLate = false;
         for (String transaction[]: transactions){
-            if (transaction[1].equalsIgnoreCase(patronName)) {
+            if (transaction[1].equalsIgnoreCase(patronID)) {
                 LocalDate dueDate = LocalDate.parse(transaction[2], DateTimeFormatter.ISO_DATE);
                 LocalDate currentDate = LocalDate.now();
                 if (currentDate.isAfter(dueDate)) {
@@ -108,9 +108,9 @@ public class LibraryManagementSystemApplication {
         }
 
         if (isLate) {
-            System.out.println("Kitabın iade tarihi geçtiği için kitap yeni kitap alamazsınız!");
+            System.out.println("You cannot borrow a new book because the book's return date has passed!");
         } else {
-            System.out.println("Yeni kitap alabilirsiniz.");
+            System.out.println("You can borrow new books.");
         }
 
         return isLate;
