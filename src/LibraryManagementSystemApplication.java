@@ -22,7 +22,19 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
 
-   
+   static void extendBooksArrayOnAddition(String title) {
+       String[] newBooks = new String[books.length + 1];
+
+       for (int i = 0; i < books.length; i++) {
+           newBooks[i][0] = books[i][0];
+           newBooks[i][1] = books[i][1];
+           newBooks[i][2] = books[i][2];
+           newBooks[i][3] = books[i][3];
+       }
+        books = newBooks;
+
+       System.out.println("Book Has Been Added Successfully!");
+   }
 
     static void requestBook(String title, String author) {
         //int pageNumber = randomPage(); write the methods with your own algorithm
