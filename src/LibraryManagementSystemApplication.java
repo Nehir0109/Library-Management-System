@@ -36,46 +36,6 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
 
-    //this method updates patrons info!!!
-    static void updatePatronInfo(Scanner scanner){
-        System.out.println("Enter ID of patron to be updated: ");
-        String patronID = scanner.nextLine();
-
-        int index = patrons(patronID);
-        if (index != -1){
-            System.out.println("Enter new name: ");
-            String newName = scanner.nextLine();
-            System.out.println("Enter new address: ");
-            String newAddress = scanner.nextLine();
-            System.out.println("Enter new phone number: ");
-            String newPhoneNumber = scanner.nextLine();
-            System.out.println("Enter new mail: ");
-            String newMail = scanner.nextLine();
-
-            patrons[index][1] = newName;
-            patrons[index][2] = newAddress;
-            patrons[index][3] = newPhoneNumber;
-            patrons[index][4] = newMail;
-
-            System.out.println("Patron information updated successfully!");
-        }else {
-            System.out.println("Patron not found!!!");
-        }
-
-    }
-    static void extendBooksArrayOnAddition(){
-        String[] newBooks = new String[books.length + 1];
-
-        for (int i = 0; i<books.length; i++){
-            newBooks[i][0] = books[i][0];
-            newBooks[i][1] = books[i][1];
-            newBooks[i][2] = books[i][2];
-            newBooks[i][3] = books[i][3];
-
-
-        }
-        books = newBooks;
-    }
 
 
     static void requestBook(String title, String author) {
