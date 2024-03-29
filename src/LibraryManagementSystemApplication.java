@@ -1,5 +1,7 @@
+import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 
 public class LibraryManagementSystemApplication {
     static int INDEX = 100;
@@ -10,6 +12,19 @@ public class LibraryManagementSystemApplication {
     static String[][] transactions = new String[INDEX][3];
 
     public static void main(String[] args) {
+
+
+    }
+
+    static String displayMenu(){
+        System.out.println("\n Welcome Library Management System");
+        System.out.println("1. Add/Edit Book");
+        System.out.println("2. Delete Book");
+        System.out.println("3. Add/Edit Patron");
+        System.out.println("4. Exit");
+
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
 
     }
 
@@ -25,7 +40,7 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
 
-   
+
 
     static void requestBook(String title, String author) {
         //int pageNumber = randomPage(); write the methods with your own algorithm
