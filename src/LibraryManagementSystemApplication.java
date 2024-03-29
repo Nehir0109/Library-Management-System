@@ -1,12 +1,30 @@
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 public class LibraryManagementSystemApplication {
     static int INDEX = 100;
     static int quantity = 0;
+    static int transactionQuantity=0;
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
 
     public static void main(String[] args) {
+
+
+    }
+
+    static String displayMenu(){
+        System.out.println("\n Welcome Library Management System");
+        System.out.println("1. Add/Edit Book");
+        System.out.println("2. Delete Book");
+        System.out.println("3. Add/Edit Patron");
+        System.out.println("4. Exit");
+
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
 
     }
 
@@ -22,6 +40,7 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
 
+
    static void extendBooksArrayOnAddition() {
        String[] newBooks = new String[books.length + 1];
 
@@ -35,6 +54,7 @@ public class LibraryManagementSystemApplication {
 
        System.out.println("Book Has Been Added Successfully!");
    }
+
 
     static void requestBook(String title, String author) {
         //int pageNumber = randomPage(); write the methods with your own algorithm
@@ -99,9 +119,55 @@ public class LibraryManagementSystemApplication {
             if (books[i][2].equals(ISBN)) {
                 foundIndex = i;
                 return foundIndex;
+            }
+        }
+        return foundIndex;
+    }
+
+    static boolean checkBookReturnDeadline(String patronID){
+        boolean isLate = false;
+        for (String transaction[]: transactions){
+            if (transaction[1].equalsIgnoreCase(patronID)) {
+                LocalDate dueDate = LocalDate.parse(transaction[2], DateTimeFormatter.ISO_DATE);
+                LocalDate currentDate = LocalDate.now();
+                if (currentDate.isAfter(dueDate)) {
+                    isLate = true;
+                    break;
+                }
+            }
+        }
+
+        if (isLate) {
+            System.out.println("You cannot borrow a new book because the book's return date has passed!");
+        } else {
+            System.out.println("You can borrow new books.");
+        }
+
+        return isLate;
+    }
+    static String checkOutBook(String identityNumber,String bookName, String bookISBN){
+        boolean isFound= false;
+        String response="ERROR: The book you are looking for can not be found!";
+        for(String[] book: books){
+            if(book[3].equals(bookISBN)){
+                isFound=true;
+
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String formattedDate = currentDate.format(dateFormatter);
+
+                transactions[quantity][0]= bookISBN;
+                transactions[quantity][1]= identityNumber;
+                transactions[quantity][2]= formattedDate;
+                transactionQuantity++;
+
+                truncateBooksArrayOnDeletion(bookISBN);
                 break;
             }
         }
+        if(isFound)
+            response=  "The book has borrowed. Good reading!";
+        return response;
     }
 }
 

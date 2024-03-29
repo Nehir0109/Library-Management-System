@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77da3a05-f15c-490c-987a-cd7a4a2be015" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LibraryManagementSystemApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LibraryManagementSystemApplication.java" afterDir="false" />
     </list>
@@ -15,6 +14,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -33,13 +37,15 @@
     &quot;Application.LibraryManagementSystemApplication.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ahmet/JA-21-kitap-silme-dizi-kisaltma&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;nehir/JA-04-kitap-alım-islemi&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/nehircakilci/Desktop/Java-Feb-1-Batch&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -61,7 +67,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
       </set>
     </attachedChunks>
   </component>
@@ -75,6 +81,13 @@
       <updated>1707236352244</updated>
       <workItem from="1707236353289" duration="4000" />
       <workItem from="1707237485639" duration="360000" />
+      <workItem from="1710511359329" duration="1331000" />
+      <workItem from="1710517539566" duration="597000" />
+      <workItem from="1710785575672" duration="1738000" />
+      <workItem from="1710793252496" duration="598000" />
+      <workItem from="1710940560498" duration="6442000" />
+      <workItem from="1711272850739" duration="2205000" />
+      <workItem from="1711553074076" duration="469000" />
     </task>
     <servers />
   </component>
