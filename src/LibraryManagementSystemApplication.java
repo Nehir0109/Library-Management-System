@@ -22,7 +22,7 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
 
-   static void extendBooksArrayOnAddition(String title) {
+   static void extendBooksArrayOnAddition() {
        String[] newBooks = new String[books.length + 1];
 
        for (int i = 0; i < books.length; i++) {
