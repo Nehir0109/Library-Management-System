@@ -30,25 +30,25 @@ public class LibraryManagementSystemApplication {
     }
 
 
-    static void updatePatronInfo(Scanner scanner){
+    static void updatePatronInfo(String fullName, String identityNumber, String email, String password){
         System.out.println("Enter ID of patron to be updated: ");
         String patronID = scanner.nextLine();
 
         int index = patrons(patronID);
         if (index != -1){
-            System.out.println("Enter new name: ");
-            String newName = scanner.nextLine();
-            System.out.println("Enter new address: ");
-            String newAddress = scanner.nextLine();
-            System.out.println("Enter new phone number: ");
-            String newPhoneNumber = scanner.nextLine();
-            System.out.println("Enter new mail: ");
-            String newMail = scanner.nextLine();
+            System.out.println("Enter Full Name: ");
+            String newfullName = scanner.nextLine();
+            System.out.println("Enter Identity Number: ");
+            String newidentityNumber = scanner.nextLine();
+            System.out.println("Enter e-mail: ");
+            String neweMail = scanner.nextLine();
+            System.out.println("Enter Password: ");
+            String newpassword = scanner.nextLine();
 
-            patrons[index][1] = newName;
-            patrons[index][2] = newAddress;
-            patrons[index][3] = newPhoneNumber;
-            patrons[index][4] = newMail;
+            patrons[index][1] = newfullName;
+            patrons[index][2] = newidentityNumber;
+            patrons[index][3] = neweMail;
+            patrons[index][4] = newpassword;
 
             System.out.println("Patron information updated successfully!");
         }else {
