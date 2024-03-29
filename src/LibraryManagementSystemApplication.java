@@ -23,7 +23,7 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
 
-    //this method updates patrons info!!!
+
     static void updatePatronInfo(Scanner scanner){
         System.out.println("Enter ID of patron to be updated: ");
         String patronID = scanner.nextLine();
@@ -50,19 +50,7 @@ public class LibraryManagementSystemApplication {
         }
 
     }
-    static void extendBooksArrayOnAddition(){
-        String[] newBooks = new String[books.length + 1];
 
-        for (int i = 0; i<books.length; i++){
-            newBooks[i][0] = books[i][0];
-            newBooks[i][1] = books[i][1];
-            newBooks[i][2] = books[i][2];
-            newBooks[i][3] = books[i][3];
-
-
-        }
-        books = newBooks;
-    }
 
 
     static void requestBook(String title, String author) {
