@@ -16,7 +16,7 @@ public class LibraryManagementSystemApplication {
 
     }
 
-    static void displayMenu(){
+    static String displayMenu(){
         System.out.println("\n Welcome Library Management System");
         System.out.println("1. Add/Edit Book");
         System.out.println("2. Delete Book");
