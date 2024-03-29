@@ -90,9 +90,31 @@ public class LibraryManagementSystemApplication {
             if (books[i][2].equals(ISBN)) {
                 foundIndex = i;
                 return foundIndex;
-                break;
             }
         }
+        return foundIndex;
+    }
+
+    static boolean checkBookReturnDeadline(String patronID){
+        boolean isLate = false;
+        for (String transaction[]: transactions){
+            if (transaction[1].equalsIgnoreCase(patronID)) {
+                LocalDate dueDate = LocalDate.parse(transaction[2], DateTimeFormatter.ISO_DATE);
+                LocalDate currentDate = LocalDate.now();
+                if (currentDate.isAfter(dueDate)) {
+                    isLate = true;
+                    break;
+                }
+            }
+        }
+
+        if (isLate) {
+            System.out.println("You cannot borrow a new book because the book's return date has passed!");
+        } else {
+            System.out.println("You can borrow new books.");
+        }
+
+        return isLate;
     }
     static String checkOutBook(String identityNumber,String bookName, String bookISBN){
         boolean isFound= false;
