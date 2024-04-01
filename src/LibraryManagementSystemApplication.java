@@ -7,6 +7,7 @@ public class LibraryManagementSystemApplication {
     static int INDEX = 100;
     static int quantity = 0;
     static int transactionQuantity=0;
+    static int patronQuantity = 0;
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
@@ -154,6 +155,49 @@ public class LibraryManagementSystemApplication {
         if(isFound)
             response=  "The book has borrowed. Good reading!";
         return response;
+    }
+    static void deleteUserInformation(String patronID) {
+        int index = getPatronIndexByID(patronID);
+        if (index == -1) {
+            System.out.println("User not found!");
+            return;
+        }
+        String[][] newPatrons = new String[patronQuantity - 1][4];
+        for (int i = 0; i < index; i++) {
+            newPatrons[i] = patrons[i];
+        }
+        for (int i = index + 1; i < patronQuantity; i++) {
+            newPatrons[i - 1] = patrons[i];
+        }
+        patrons = newPatrons;
+        patronQuantity--;
+
+        cleanTransactionsByPatronID(patronID);
+
+        System.out.println("The user has been deleted successfully.");
+    }
+    static void cleanTransactionsByPatronID(String patronID) {
+        for (int i = 0; i < transactionQuantity; i++) {
+            if (transactions[i][1].equals(patronID)) {
+                transactions[i] = null;
+                for (int j = i; j < transactionQuantity - 1; j++) {
+                    transactions[j] = transactions[j + 1];
+                }
+                transactions[transactionQuantity - 1] = null;
+                transactionQuantity--;
+                break;
+            }
+        }
+    }
+    static int getPatronIndexByID(String patronID) {
+        int foundIndex = -1;
+        for (int i = 0; i < patronQuantity; i++) {
+            if (patrons[i][0].equals(patronID)) {
+                foundIndex = i;
+                break;
+            }
+        }
+        return foundIndex;
     }
 }
 
