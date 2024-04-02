@@ -38,9 +38,23 @@ public class LibraryManagementSystemApplication {
 
         quantity++;
 
-        System.out.println("Kitabı Başarıyla Eklediniz!");
+        System.out.println("You have successfully added the book!");
     }
 
+
+   static void extendBooksArrayOnAddition() {
+       String[] newBooks = new String[books.length + 1];
+
+       for (int i = 0; i < books.length; i++) {
+           newBooks[i][0] = books[i][0];
+           newBooks[i][1] = books[i][1];
+           newBooks[i][2] = books[i][2];
+           newBooks[i][3] = books[i][3];
+       }
+        books = newBooks;
+
+       System.out.println("Book Has Been Added Successfully!");
+   }
 
 
     static void requestBook(String title, String author) {
@@ -58,7 +72,7 @@ public class LibraryManagementSystemApplication {
     static void truncateBooksArrayOnDeletion(String ISBN) {
         int index = getBookIndexByID(ISBN);
         if (index == -1) {
-            System.out.println("Kitap Bulunamadı!");
+            System.out.println("Book Not Found!");
             return;
         }
         String[][] newBooks = new String[quantity - 1][4];
@@ -71,18 +85,18 @@ public class LibraryManagementSystemApplication {
         books = newBooks;
         quantity--;
 
-        System.out.println("Kitap başarıyla silindi ve dizi güncellendi.");
+        System.out.println("The book has been successfully deleted and the array has been updated.");
     }
 
     static void deleteBook(String ISBN){
         if (quantity == 0) {
-            System.out.println("Kütüphanede kitap bulunmamaktadır.");
+            System.out.println("There are no books in the library.");
         } else {
             int index = getBookIndexByID(ISBN);
             if (index != -1) {
                 truncateBooksArrayOnDeletion(ISBN);
             } else {
-                System.out.println("Kitap bulunamadı!");
+                System.out.println("Book not found!");
             }
         }
     }
@@ -90,14 +104,14 @@ public class LibraryManagementSystemApplication {
     static void updateBook(String ISBN,String newTitle,String newAuthor,String newPageNumber){
         int index = getBookIndexByID(ISBN);
         if (index==-1){
-            System.out.println("Kitap bulunamadı!");
+            System.out.println("Book not found!");
         }else{
             books[index][0]=newTitle;
             books[index][1]=newAuthor;
             books[index][2]=ISBN;
             books[index][3]=newPageNumber;
 
-            System.out.println(ISBN+" numaralı kitap güncellendi!");
+            System.out.println(ISBN+" book number updated!");
         }
     }
     static int getBookIndexByID(String ISBN){
@@ -156,6 +170,7 @@ public class LibraryManagementSystemApplication {
             response=  "The book has borrowed. Good reading!";
         return response;
     }
+
     static void deleteUserInformation(String patronID) {
         int index = getPatronIndexByID(patronID);
         if (index == -1) {
@@ -198,6 +213,14 @@ public class LibraryManagementSystemApplication {
             }
         }
         return foundIndex;
+      
+    static void returnBook(String patronID, String title, String author, String ISBN, String pageNumber) {
+        if (!checkBookReturnDeadline(patronID)) {
+            addBook(title,author,ISBN,pageNumber);
+            System.out.println("The book was returned. The new book can be borrowed!");
+        } else {
+            System.out.println("You cannot borrow a new book without returning the book!");
+        }
     }
 }
 
