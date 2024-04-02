@@ -16,6 +16,30 @@ public class LibraryManagementSystemApplication {
 
     }
 
+    static void reserveBook(String patronID, String title, String ISBN, int reservationTime) {
+        for (String[] book : books) {
+            if (book[2].equals(ISBN) && book[4].equals("false")) {// books[4] - reserved state of book true or false, should it be added in addBook method ?
+                for (String[] patron : patrons) {
+                    if (patron[0].equals(patronID)) {
+                        patron[1] = title;
+                        patron[2] = ISBN;
+                        patron[3] = String.valueOf(reservationTime);
+                        // in order to checkout a book, it should be reserved first?.
+                        // should reservation time be used as deadline time for the checkoutBook method and others ?
+                        // Should the checkoutBook method get the book from the patron itself and then checkout?
+                    }
+                }
+                //            Reserve edilmis kitaplara bir property adamamiz gerekmez mi ?
+                //            baskalari reserve edemesin diye.
+                book[4] = String.valueOf(true);
+                System.out.println("Reservation for " + title + " is completed.");
+                break;
+            } else {
+                System.out.println("The book you want is already reserved.");
+            }
+        }
+    }
+
     static String displayMenu(){
         System.out.println("\n Welcome Library Management System");
         System.out.println("1. Add/Edit Book");
@@ -29,7 +53,6 @@ public class LibraryManagementSystemApplication {
     }
 
     static void addBook(String title, String author, String ISBN, String pageNumber){
-
         books[quantity][0] = title;
         books[quantity][1] = author;
         books[quantity][2] = ISBN;
