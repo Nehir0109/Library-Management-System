@@ -1,6 +1,4 @@
-
 import java.util.Scanner;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +13,19 @@ public class LibraryManagementSystemApplication {
 
     public static void main(String[] args) {
 
+
+    }
+
+    static String displayMenu(){
+        System.out.println("\n Welcome Library Management System");
+        System.out.println("1. Add/Edit Book");
+        System.out.println("2. Delete Book");
+        System.out.println("3. Add/Edit Patron");
+        System.out.println("4. Exit");
+
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+
     }
 
     static void addBook(String title, String author, String ISBN, String pageNumber){
@@ -28,6 +39,7 @@ public class LibraryManagementSystemApplication {
 
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
+
 
 
     static void updatePatronInfo(String fullName, String identityNumber, String email, String password){
@@ -121,9 +133,31 @@ public class LibraryManagementSystemApplication {
             if (books[i][2].equals(ISBN)) {
                 foundIndex = i;
                 return foundIndex;
-                break;
             }
         }
+        return foundIndex;
+    }
+
+    static boolean checkBookReturnDeadline(String patronID){
+        boolean isLate = false;
+        for (String transaction[]: transactions){
+            if (transaction[1].equalsIgnoreCase(patronID)) {
+                LocalDate dueDate = LocalDate.parse(transaction[2], DateTimeFormatter.ISO_DATE);
+                LocalDate currentDate = LocalDate.now();
+                if (currentDate.isAfter(dueDate)) {
+                    isLate = true;
+                    break;
+                }
+            }
+        }
+
+        if (isLate) {
+            System.out.println("You cannot borrow a new book because the book's return date has passed!");
+        } else {
+            System.out.println("You can borrow new books.");
+        }
+
+        return isLate;
     }
     static String checkOutBook(String identityNumber,String bookName, String bookISBN){
         boolean isFound= false;
