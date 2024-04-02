@@ -31,8 +31,6 @@ public class LibraryManagementSystemApplication {
 
 
     static void updatePatronInfo(String fullName, String identityNumber, String email, String password){
-        System.out.println("Enter ID of patron to be updated: ");
-        String patronID = scanner.nextLine();
 
         int index = patrons(patronID);
         if (index != -1){
