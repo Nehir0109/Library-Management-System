@@ -178,11 +178,15 @@ public class LibraryManagementSystemApplication {
             return;
         }
         String[][] newPatrons = new String[patronQuantity - 1][4];
-        for (int i = 0; i < index; i++) {
-            newPatrons[i] = patrons[i];
-        }
-        for (int i = index + 1; i < patronQuantity; i++) {
-            newPatrons[i - 1] = patrons[i];
+        for (int i = 0; i < patronQuantity; i++) {
+            if (i == index) {
+                continue;
+            }
+            if (i < index) {
+                newPatrons[i] = patrons[i];
+            } else {
+                newPatrons[i - 1] = patrons[i];
+            }
         }
         patrons = newPatrons;
         patronQuantity--;
