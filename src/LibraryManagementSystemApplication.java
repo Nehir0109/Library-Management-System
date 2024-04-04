@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class LibraryManagementSystemApplication {
     static int INDEX = 100;
     static int quantity = 0;
-    static int transactionQuantity=0;
+    static int transactionQuantity = 0;
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
@@ -16,7 +16,7 @@ public class LibraryManagementSystemApplication {
 
     }
 
-    static String displayMenu(){
+    static String displayMenu() {
         System.out.println("\n Welcome Library Management System");
         System.out.println("1. Add/Edit Book");
         System.out.println("2. Delete Book");
@@ -28,7 +28,7 @@ public class LibraryManagementSystemApplication {
 
     }
 
-    static void addBook(String title, String author, String ISBN, String pageNumber){
+    static void addBook(String title, String author, String ISBN, String pageNumber) {
 
         books[quantity][0] = title;
         books[quantity][1] = author;
@@ -41,19 +41,19 @@ public class LibraryManagementSystemApplication {
     }
 
 
-   static void extendBooksArrayOnAddition() {
-       String[] newBooks = new String[books.length + 1];
+    static void extendBooksArrayOnAddition() {
+        String[] newBooks = new String[books.length + 1];
 
-       for (int i = 0; i < books.length; i++) {
-           newBooks[i][0] = books[i][0];
-           newBooks[i][1] = books[i][1];
-           newBooks[i][2] = books[i][2];
-           newBooks[i][3] = books[i][3];
-       }
+        for (int i = 0; i < books.length; i++) {
+            newBooks[i][0] = books[i][0];
+            newBooks[i][1] = books[i][1];
+            newBooks[i][2] = books[i][2];
+            newBooks[i][3] = books[i][3];
+        }
         books = newBooks;
 
-       System.out.println("Book Has Been Added Successfully!");
-   }
+        System.out.println("Book Has Been Added Successfully!");
+    }
 
 
     static void requestBook(String title, String author) {
@@ -87,7 +87,7 @@ public class LibraryManagementSystemApplication {
         System.out.println("The book has been successfully deleted and the array has been updated.");
     }
 
-    static void deleteBook(String ISBN){
+    static void deleteBook(String ISBN) {
         if (quantity == 0) {
             System.out.println("There are no books in the library.");
         } else {
@@ -100,20 +100,21 @@ public class LibraryManagementSystemApplication {
         }
     }
 
-    static void updateBook(String ISBN,String newTitle,String newAuthor,String newPageNumber){
+    static void updateBook(String ISBN, String newTitle, String newAuthor, String newPageNumber) {
         int index = getBookIndexByID(ISBN);
-        if (index==-1){
+        if (index == -1) {
             System.out.println("Book not found!");
-        }else{
-            books[index][0]=newTitle;
-            books[index][1]=newAuthor;
-            books[index][2]=ISBN;
-            books[index][3]=newPageNumber;
+        } else {
+            books[index][0] = newTitle;
+            books[index][1] = newAuthor;
+            books[index][2] = ISBN;
+            books[index][3] = newPageNumber;
 
-            System.out.println(ISBN+" book number updated!");
+            System.out.println(ISBN + " book number updated!");
         }
     }
-    static int getBookIndexByID(String ISBN){
+
+    static int getBookIndexByID(String ISBN) {
         int foundIndex = -1;
         for (int i = 0; i < quantity; i++) {
             if (books[i][2].equals(ISBN)) {
@@ -124,9 +125,9 @@ public class LibraryManagementSystemApplication {
         return foundIndex;
     }
 
-    static boolean checkBookReturnDeadline(String patronID){
+    static boolean checkBookReturnDeadline(String patronID) {
         boolean isLate = false;
-        for (String transaction[]: transactions){
+        for (String transaction[] : transactions) {
             if (transaction[1].equalsIgnoreCase(patronID)) {
                 LocalDate dueDate = LocalDate.parse(transaction[2], DateTimeFormatter.ISO_DATE);
                 LocalDate currentDate = LocalDate.now();
@@ -145,33 +146,35 @@ public class LibraryManagementSystemApplication {
 
         return isLate;
     }
-    static String checkOutBook(String identityNumber,String bookName, String bookISBN){
-        boolean isFound= false;
-        String response="ERROR: The book you are looking for can not be found!";
-        for(String[] book: books){
-            if(book[3].equals(bookISBN)){
-                isFound=true;
+
+    static String checkOutBook(String identityNumber, String bookName, String bookISBN) {
+        boolean isFound = false;
+        String response = "ERROR: The book you are looking for can not be found!";
+        for (String[] book : books) {
+            if (book[3].equals(bookISBN)) {
+                isFound = true;
 
                 LocalDate currentDate = LocalDate.now();
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String formattedDate = currentDate.format(dateFormatter);
 
-                transactions[quantity][0]= bookISBN;
-                transactions[quantity][1]= identityNumber;
-                transactions[quantity][2]= formattedDate;
+                transactions[quantity][0] = bookISBN;
+                transactions[quantity][1] = identityNumber;
+                transactions[quantity][2] = formattedDate;
                 transactionQuantity++;
 
                 truncateBooksArrayOnDeletion(bookISBN);
                 break;
             }
         }
-        if(isFound)
-            response=  "The book has borrowed. Good reading!";
+        if (isFound)
+            response = "The book has borrowed. Good reading!";
         return response;
     }
+
     static void returnBook(String patronID, String title, String author, String ISBN, String pageNumber) {
         if (!checkBookReturnDeadline(patronID)) {
-            addBook(title,author,ISBN,pageNumber);
+            addBook(title, author, ISBN, pageNumber);
             System.out.println("The book was returned. The new book can be borrowed!");
         } else {
             System.out.println("You cannot borrow a new book without returning the book!");
@@ -179,3 +182,37 @@ public class LibraryManagementSystemApplication {
     }
 }
 
+
+static String generateBookRecommendations(String patronId) {
+    String bookISBN = findBookISBNByCustomerId(patronId);
+    if (bookISBN == null) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(books.length);
+        return "Size Önerilen Kitap:" + books[randomIndex][0] + "Kitabın Yazarı: " + books[randomIndex][1];
+
+    } else {
+        String bookAuthor = "";
+        for (int i = 0; i < books.length; i++) {
+            if (books[i][2].equals(bookISBN)) {
+                bookAuthor = books[i][1];
+            }
+        }
+        System.out.println("Size Önerilen Kitaplar : ");
+        for (int j = 0; j < books.length; j++) {
+            if (books[j][1].equals(bookAuthor)) {
+                return "Size Önerilen Kitap:" + books[j][0] + "Kitabın Yazarı: " + books[j][1];
+            }
+        }
+        return null;
+    }
+}
+
+private static String findBookISBNByCustomerId(String patronId) {
+    for (int i = 0; i < transactions.length; i++) {
+        if (transactions[i][1].equals(patronId)) {
+            return transactions[i][0];
+        }
+    }
+    return null;
+}
+}
