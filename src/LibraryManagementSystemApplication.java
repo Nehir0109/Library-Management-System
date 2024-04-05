@@ -16,6 +16,23 @@ public class LibraryManagementSystemApplication {
 
     }
 
+//    Oruj - [JA-24] Book reservation start
+    static void reserveBook(String patronID, String ISBN, int reservationTime) {
+        int bookIndex = getBookIndexByID(ISBN);
+        if (bookIndex != -1) {
+            for (String[] patron : patrons) {
+                if (patron[1].equals(patronID)) {
+                    System.out.println("Reservation for " + books[bookIndex][0] +
+                            "for " + reservationTime+" days is completed by " + patron[0]);
+                    break;
+                }
+            }
+        } else {
+            System.out.println("The book you are looking for does not exist.");
+        }
+    }
+//    Oruj - [JA-24] Book reservation End
+
     static String displayMenu(){
         System.out.println("\n Welcome Library Management System");
         System.out.println("1. Add/Edit Book");
@@ -29,7 +46,6 @@ public class LibraryManagementSystemApplication {
     }
 
     static void addBook(String title, String author, String ISBN, String pageNumber){
-
         books[quantity][0] = title;
         books[quantity][1] = author;
         books[quantity][2] = ISBN;
