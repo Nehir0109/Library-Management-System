@@ -16,6 +16,32 @@ public class LibraryManagementSystemApplication {
 
     }
 
+//    Oruj - [JA-07] Report generation start
+    static void generateReports() {
+        System.out.println("------------------Library Report------------------ \n" +
+                "Total number of books in system: " + quantity + " \n" +
+                "List of books: ");
+        String report = "";
+        int lineCount = 1;
+
+        for (final String[] row : books) {
+            report += lineCount + ": " + String.format("|Name:   %s |  %n" +
+                    "   |Author:   %s |   %n" +
+                    "   |ISBN:   %s |   %n" +
+                    "   |Page Number:  %s |  %n" +
+                    "   __________________ %n", row);
+
+            lineCount++;
+            report += "   Transaction history: \n   __________________ \n";
+            if (lineCount > quantity) {
+                break;
+            }
+        }
+        System.out.println(report);
+    }
+
+//    Oruj - [JA-07] Report generation END
+
 //    Oruj - [JA-24] Book reservation start
     static void reserveBook(String patronID, String ISBN, int reservationTime) {
         int bookIndex = getBookIndexByID(ISBN);
