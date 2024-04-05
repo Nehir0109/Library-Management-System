@@ -16,29 +16,22 @@ public class LibraryManagementSystemApplication {
 
     }
 
-    static void reserveBook(String patronID, String title, String ISBN, int reservationTime) {
-        for (String[] book : books) {
-            if (book[2].equals(ISBN) && book[4].equals("false")) {// books[4] - reserved state of book true or false, should it be added in addBook method ?
-                for (String[] patron : patrons) {
-                    if (patron[0].equals(patronID)) {
-                        patron[1] = title;
-                        patron[2] = ISBN;
-                        patron[3] = String.valueOf(reservationTime);
-                        // in order to checkout a book, it should be reserved first?.
-                        // should reservation time be used as deadline time for the checkoutBook method and others ?
-                        // Should the checkoutBook method get the book from the patron itself and then checkout?
-                    }
+//    Oruj - [JA-24] Book reservation start
+    static void reserveBook(String patronID, String ISBN, int reservationTime) {
+        int bookIndex = getBookIndexByID(ISBN);
+        if (bookIndex != -1) {
+            for (String[] patron : patrons) {
+                if (patron[1].equals(patronID)) {
+                    System.out.println("Reservation for " + books[bookIndex][0] +
+                            "for " + reservationTime+" days is completed by " + patron[0]);
+                    break;
                 }
-                //            Reserve edilmis kitaplara bir property adamamiz gerekmez mi ?
-                //            baskalari reserve edemesin diye.
-                book[4] = String.valueOf(true);
-                System.out.println("Reservation for " + title + " is completed.");
-                break;
-            } else {
-                System.out.println("The book you want is already reserved.");
             }
+        } else {
+            System.out.println("The book you are looking for does not exist.");
         }
     }
+//    Oruj - [JA-24] Book reservation End
 
     static String displayMenu(){
         System.out.println("\n Welcome Library Management System");
