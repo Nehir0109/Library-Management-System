@@ -14,8 +14,33 @@ public class LibraryManagementSystemApplication {
 
     public static void main(String[] args) {
 
-
     }
+
+//    Oruj - [JA-07] Report generation start
+    static void generateReports() {
+        System.out.println("------------------Library Report------------------ \n" +
+                "Total number of books in system: " + quantity + " \n" +
+                "List of books: ");
+        String report = "";
+        int lineCount = 1;
+
+        for (final String[] row : books) {
+            report += lineCount + ": " + String.format("|Name:   %s |  %n" +
+                    "   |Author:   %s |   %n" +
+                    "   |ISBN:   %s |   %n" +
+                    "   |Page Number:  %s |  %n" +
+                    "   __________________ %n", row);
+
+            lineCount++;
+            report += "   Transaction history: \n   __________________ \n";
+            if (lineCount > quantity) {
+                break;
+            }
+        }
+        System.out.println(report);
+    }
+
+//    Oruj - [JA-07] Report generation END
 
 //    Oruj - [JA-24] Book reservation start
     static void reserveBook(String patronID, String ISBN, int reservationTime) {
@@ -194,15 +219,13 @@ public class LibraryManagementSystemApplication {
             return;
         }
         String[][] newPatrons = new String[patronQuantity - 1][4];
+        int newIndex = 0;
         for (int i = 0; i < patronQuantity; i++) {
             if (i == index) {
                 continue;
             }
-            if (i < index) {
-                newPatrons[i] = patrons[i];
-            } else {
-                newPatrons[i - 1] = patrons[i];
-            }
+            newPatrons[newIndex] = patrons[i];
+            newIndex++;
         }
         patrons = newPatrons;
         patronQuantity--;
@@ -212,17 +235,19 @@ public class LibraryManagementSystemApplication {
         System.out.println("The user has been deleted successfully.");
     }
     static void cleanTransactionsByPatronID(String patronID) {
+        String[][] newTransactions = new String[transactionQuantity - 1][2];
+        int newIndex = 0;
         for (int i = 0; i < transactionQuantity; i++) {
             if (transactions[i][1].equals(patronID)) {
-                transactions[i] = null;
-                for (int j = i; j < transactionQuantity - 1; j++) {
-                    transactions[j] = transactions[j + 1];
-                }
-                transactions[transactionQuantity - 1] = null;
-                transactionQuantity--;
-                break;
+                continue;
             }
+            newTransactions[newIndex] = transactions[i];
+            newIndex++;
         }
+        transactions = newTransactions;
+        transactionQuantity--;
+
+        System.out.println("Transactions for the user with ID " + patronID + " have been cleaned successfully.");
     }
     static int getPatronIndexByID(String patronID) {
         int foundIndex = -1;
