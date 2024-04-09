@@ -208,7 +208,7 @@ public class LibraryManagementSystemApplication {
             }
         }
         if(isFound)
-            response=  "The book has borrowed. Good reading!";
+            response=  successMessage ("The book has borrowed. Good reading!");
         return response;
     }
     static void returnBook(String patronID, String title, String author, String ISBN, String pageNumber) {
@@ -219,5 +219,11 @@ public class LibraryManagementSystemApplication {
             System.out.println("You cannot borrow a new book without returning the book!");
         }
     }
+
+    static String successMessage(String message){
+       String response = "The process has been completed : " + message;
+        return response;
+    }
+
 }
 
