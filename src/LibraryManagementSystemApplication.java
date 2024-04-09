@@ -16,7 +16,7 @@ public class LibraryManagementSystemApplication {
 
     }
 
-    //    Oruj - [JA-07] Report generation start
+//    Oruj - [JA-07] Report generation start
     static void generateReports() {
         System.out.println("------------------Library Report------------------ \n" +
                 "Total number of books in system: " + quantity + " \n" +
@@ -42,7 +42,7 @@ public class LibraryManagementSystemApplication {
 
 //    Oruj - [JA-07] Report generation END
 
-    //    Oruj - [JA-24] Book reservation start
+//    Oruj - [JA-24] Book reservation start
     static void reserveBook(String patronID, String ISBN, int reservationTime) {
         int bookIndex = getBookIndexByID(ISBN);
         if (bookIndex != -1) {
@@ -83,19 +83,19 @@ public class LibraryManagementSystemApplication {
     }
 
 
-//   static void extendBooksArrayOnAddition() {
-//       String[] newBooks = new String[books.length + 1];
-//
-//       for (int i = 0; i < books.length; i++) {
-//           newBooks[i][0] = books[i][0];
-//           newBooks[i][1] = books[i][1];
-//           newBooks[i][2] = books[i][2];
-//           newBooks[i][3] = books[i][3];
-//       }
-//        books = newBooks;
-//
-//       System.out.println("Book Has Been Added Successfully!");
-//   }
+   static void extendBooksArrayOnAddition() {
+       String[] newBooks = new String[books.length + 1];
+
+       for (int i = 0; i < books.length; i++) {
+           newBooks[i][0] = books[i][0];
+           newBooks[i][1] = books[i][1];
+           newBooks[i][2] = books[i][2];
+           newBooks[i][3] = books[i][3];
+       }
+        books = newBooks;
+
+       System.out.println("Book Has Been Added Successfully!");
+   }
 
 
     static void requestBook(String title, String author) {
