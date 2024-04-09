@@ -222,6 +222,7 @@ public class LibraryManagementSystemApplication {
 
     static String successMessage(String message){
        String response = "The process has been completed : " + message;
+        System.out.println(response);
         return response;
     }
 
