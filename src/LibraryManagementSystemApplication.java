@@ -7,6 +7,7 @@ public class LibraryManagementSystemApplication {
     static int INDEX = 100;
     static int quantity = 0;
     static int transactionQuantity=0;
+    static int patronQuantity = 0;
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
@@ -219,5 +220,16 @@ public class LibraryManagementSystemApplication {
             System.out.println("You cannot borrow a new book without returning the book!");
         }
     }
+    static int invalidLoginCheck(String email, String password) {
+        for (int i=0; i<patronQuantity;i++){
+            if (patrons[i][2].equals(email) && patrons[i][3].equals(password)){
+                System.out.println("Login successful. You can proceed!");
+                return i;
+            }
+        }
+        System.out.println("Invalid login! Please check your email or password!");
+        return -1;
+    }
+
 }
 
