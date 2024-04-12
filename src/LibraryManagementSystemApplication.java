@@ -45,21 +45,13 @@ public class LibraryManagementSystemApplication {
     static void updatePatronInfo(String fullName, String identityNumber, String email, String password){
 
 
-        int index = patrons(patronID);
+        int index = getPatronIndexByID(identityNumber);
         if (index != -1){
-            System.out.println("Enter Full Name: ");
-            String newfullName = scanner.nextLine();
-            System.out.println("Enter Identity Number: ");
-            String newidentityNumber = scanner.nextLine();
-            System.out.println("Enter e-mail: ");
-            String neweMail = scanner.nextLine();
-            System.out.println("Enter Password: ");
-            String newpassword = scanner.nextLine();
 
-            patrons[index][1] = newfullName;
-            patrons[index][2] = newidentityNumber;
-            patrons[index][3] = neweMail;
-            patrons[index][4] = newpassword;
+            patrons[index][1] = fullName;
+            patrons[index][2] = identityNumber;
+            patrons[index][3] = email;
+            patrons[index][4] = password;
 
             System.out.println("Patron information updated successfully!");
         }else {
@@ -126,6 +118,16 @@ public class LibraryManagementSystemApplication {
 
             System.out.println(ISBN+" numaralı kitap güncellendi!");
         }
+    }
+    static int getPatronIndexByID(String id){
+        int index = -1
+                for(int i = 0; i<patrons.length; i++){
+                    if (patrons[i][2].equals(id)){
+                        index = i;
+                        break;;
+                    }
+                }
+                return index;
     }
     static int getBookIndexByID(String ISBN){
         int foundIndex = -1;
