@@ -219,5 +219,9 @@ public class LibraryManagementSystemApplication {
             System.out.println("You cannot borrow a new book without returning the book!");
         }
     }
+
+    static void countTotalBooks(){
+        System.out.print("Total number of books: "+ quantity);
+    }
 }
 
