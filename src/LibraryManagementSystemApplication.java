@@ -219,5 +219,77 @@ public class LibraryManagementSystemApplication {
             System.out.println("You cannot borrow a new book without returning the book!");
         }
     }
+
+    static void searchBooks(){
+        Scanner get= new Scanner(System.in);
+
+        System.out.println(" Choose searching criteria: ");
+        System.out.println("1. Title ");
+        System.out.println("2. Author ");
+        System.out.println("3. ISBN");
+        int choice= get.nextInt();
+
+        System.out.print("Enter the word you are looking for: ");
+        String searchWord = get.nextLine();
+
+        switch(choice){
+            case 1:
+                searchByTitle(searchWord);
+                break;
+            case 2:
+                searchByAuthor(searchWord);
+                break;
+            case 3:
+                searchByISBN(searchWord);
+                break;
+            default:
+                System.out.println("Invalid choice!");
+        }
+    }
+
+    static void searchByTitle(String title){
+        boolean isFound= false;
+        for(String[] book: books){
+            if(book[0]!= null && book[0].equalsIgnoreCase(title)){
+                displayBookInfo(book);
+                isFound= true;
+            }
+        }
+        if(!isFound){
+            System.out.println("No books matching the title were found.");
+        }
+    }
+
+    static void searchByAuthor(String author){
+        boolean isFound= false;
+        for(String[] book: books){
+            if(book[1] != null && book[1].equalsIgnoreCase(author)){
+                displayBookInfo(book);
+                isFound= true;
+            }
+        }
+        if(!isFound){
+            System.out.println("No books matching the author were found.");
+        }
+    }
+
+    static void searchByISBN(String ISBN){
+        boolean isFound= false;
+        for(String[] book: books){
+            if(book[2] != null && book[2].equalsIgnoreCase(ISBN)){
+                displayBookInfo(book);
+                isFound= true;
+            }
+        }
+        if(!isFound){
+            System.out.println("No book found matching ISBN number. ");
+        }
+    }
+
+    static void displayBookInfo(String[] book){
+        System.out.println("Book's name: "+ book[0]);
+        System.out.println("Author: "+ book[1]);
+        System.out.println("ISBN: "+ book[2]);
+    }
 }
 
