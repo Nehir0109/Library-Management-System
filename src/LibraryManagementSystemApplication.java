@@ -14,6 +14,7 @@ public class LibraryManagementSystemApplication {
 
     public static void main(String[] args) {
 
+        
     }
 
 //    Oruj - [JA-07] Report generation start
