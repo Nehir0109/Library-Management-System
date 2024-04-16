@@ -7,13 +7,14 @@ public class LibraryManagementSystemApplication {
     static int INDEX = 100;
     static int quantity = 0;
     static int transactionQuantity=0;
+    static int patronQuantity = 0;
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
 
     public static void main(String[] args) {
 
-
+        
     }
 
 //    Oruj - [JA-07] Report generation start
@@ -241,6 +242,55 @@ public class LibraryManagementSystemApplication {
             response=  "The book has borrowed. Good reading!";
         return response;
     }
+
+    static void deleteUserInformation(String patronID) {
+        int index = getPatronIndexByID(patronID);
+        if (index == -1) {
+            System.out.println("User not found!");
+            return;
+        }
+        String[][] newPatrons = new String[patronQuantity - 1][4];
+        int newIndex = 0;
+        for (int i = 0; i < patronQuantity; i++) {
+            if (i == index) {
+                continue;
+            }
+            newPatrons[newIndex] = patrons[i];
+            newIndex++;
+        }
+        patrons = newPatrons;
+        patronQuantity--;
+
+        cleanTransactionsByPatronID(patronID);
+
+        System.out.println("The user has been deleted successfully.");
+    }
+    static void cleanTransactionsByPatronID(String patronID) {
+        String[][] newTransactions = new String[transactionQuantity - 1][2];
+        int newIndex = 0;
+        for (int i = 0; i < transactionQuantity; i++) {
+            if (transactions[i][1].equals(patronID)) {
+                continue;
+            }
+            newTransactions[newIndex] = transactions[i];
+            newIndex++;
+        }
+        transactions = newTransactions;
+        transactionQuantity--;
+
+        System.out.println("Transactions for the user with ID " + patronID + " have been cleaned successfully.");
+    }
+    static int getPatronIndexByID(String patronID) {
+        int foundIndex = -1;
+        for (int i = 0; i < patronQuantity; i++) {
+            if (patrons[i][0].equals(patronID)) {
+                foundIndex = i;
+                break;
+            }
+        }
+        return foundIndex;
+    }
+    
     static void returnBook(String patronID, String title, String author, String ISBN, String pageNumber) {
         if (!checkBookReturnDeadline(patronID)) {
             addBook(title,author,ISBN,pageNumber);
