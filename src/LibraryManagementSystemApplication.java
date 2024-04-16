@@ -300,6 +300,11 @@ public class LibraryManagementSystemApplication {
         }
     }
 
+
+    static void countTotalBooks(){
+        System.out.print("Total number of books: "+ quantity);
+    }
+
     static void searchBooks(){
         Scanner get= new Scanner(System.in);
 
