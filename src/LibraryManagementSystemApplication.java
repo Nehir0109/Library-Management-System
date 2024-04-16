@@ -40,7 +40,14 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
 
-
+    static boolean isBookAvailable(String ISBN) {
+        for (int i = 0; i < quantity; i++) {
+            if (books[i][2].equals(ISBN)) {
+                return true; // Kitap bulundu
+            }
+        }
+        return false; // Kitap bulunamadı
+    }
 
     static void requestBook(String title, String author) {
         //int pageNumber = randomPage(); write the methods with your own algorithm
