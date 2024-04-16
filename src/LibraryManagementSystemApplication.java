@@ -7,13 +7,14 @@ public class LibraryManagementSystemApplication {
     static int INDEX = 100;
     static int quantity = 0;
     static int transactionQuantity=0;
+    static int patronQuantity = 0;
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
 
     public static void main(String[] args) {
 
-
+        
     }
 
 //    Oruj - [JA-07] Report generation start
@@ -98,6 +99,26 @@ public class LibraryManagementSystemApplication {
    }
 
 
+    static void updatePatronInfo(String fullName, String identityNumber, String email, String password){
+
+
+        int index = getPatronIndexByID(identityNumber);
+        if (index != -1){
+
+            patrons[index][1] = fullName;
+            patrons[index][2] = identityNumber;
+            patrons[index][3] = email;
+            patrons[index][4] = password;
+
+            System.out.println("Patron information updated successfully!");
+        }else {
+            System.out.println("Patron not found!!!");
+        }
+
+    }
+
+
+
     static void requestBook(String title, String author) {
         //int pageNumber = randomPage(); write the methods with your own algorithm
         // int ISBN = randomISBN();
@@ -155,6 +176,16 @@ public class LibraryManagementSystemApplication {
             System.out.println(ISBN+" book number updated!");
         }
     }
+    static int getPatronIndexByID(String id){
+        int index = -1
+                for(int i = 0; i<patrons.length; i++){
+                    if (patrons[i][2].equals(id)){
+                        index = i;
+                        break;;
+                    }
+                }
+                return index;
+    }
     static int getBookIndexByID(String ISBN){
         int foundIndex = -1;
         for (int i = 0; i < quantity; i++) {
@@ -211,6 +242,55 @@ public class LibraryManagementSystemApplication {
             response=  "The book has borrowed. Good reading!";
         return response;
     }
+
+    static void deleteUserInformation(String patronID) {
+        int index = getPatronIndexByID(patronID);
+        if (index == -1) {
+            System.out.println("User not found!");
+            return;
+        }
+        String[][] newPatrons = new String[patronQuantity - 1][4];
+        int newIndex = 0;
+        for (int i = 0; i < patronQuantity; i++) {
+            if (i == index) {
+                continue;
+            }
+            newPatrons[newIndex] = patrons[i];
+            newIndex++;
+        }
+        patrons = newPatrons;
+        patronQuantity--;
+
+        cleanTransactionsByPatronID(patronID);
+
+        System.out.println("The user has been deleted successfully.");
+    }
+    static void cleanTransactionsByPatronID(String patronID) {
+        String[][] newTransactions = new String[transactionQuantity - 1][2];
+        int newIndex = 0;
+        for (int i = 0; i < transactionQuantity; i++) {
+            if (transactions[i][1].equals(patronID)) {
+                continue;
+            }
+            newTransactions[newIndex] = transactions[i];
+            newIndex++;
+        }
+        transactions = newTransactions;
+        transactionQuantity--;
+
+        System.out.println("Transactions for the user with ID " + patronID + " have been cleaned successfully.");
+    }
+    static int getPatronIndexByID(String patronID) {
+        int foundIndex = -1;
+        for (int i = 0; i < patronQuantity; i++) {
+            if (patrons[i][0].equals(patronID)) {
+                foundIndex = i;
+                break;
+            }
+        }
+        return foundIndex;
+    }
+    
     static void returnBook(String patronID, String title, String author, String ISBN, String pageNumber) {
         if (!checkBookReturnDeadline(patronID)) {
             addBook(title,author,ISBN,pageNumber);
@@ -291,5 +371,52 @@ public class LibraryManagementSystemApplication {
         System.out.println("Author: "+ book[1]);
         System.out.println("ISBN: "+ book[2]);
     }
+  
+    static int invalidLoginCheck(String email, String password) {
+        for (int i=0; i<patronQuantity;i++){
+            if (patrons[i][2].equals(email) && patrons[i][3].equals(password)){
+                System.out.println("Login successful. You can proceed!");
+                return i;
+            }
+        }
+        System.out.println("Invalid login! Please check your email or password!");
+        return -1;
+    }
+
+}
+
+static String generateBookRecommendations(String patronId) {
+    String bookISBN = findBookISBNByPatronId()Id(patronId);
+    if (bookISBN == null) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(books.length);
+        return "Recommended Book for You:" + books[randomIndex][0] + "The author of the book: " + books[randomIndex][1];
+
+    } else {
+        String bookAuthor = "";
+        for (int i = 0; i < books.length; i++) {
+            if (books[i][2].equals(bookISBN)) {
+                bookAuthor = books[i][1];
+            }
+        }
+        System.out.println("Books Recommended for You: ");
+        for (int j = 0; j < books.length; j++) {
+            if (books[j][1].equals(bookAuthor)) {
+                return "Recommended Book for You:" + books[j][0] + "The author of the book: " + books[j][1];
+            }
+        }
+        return  "No books similar to your previous selections were found.";
+    }
+}
+
+private static String findBookISBNByPatronId(String patronId) {
+    for (int i = 0; i < transactions.length; i++) {
+        if (transactions[i][1].equals(patronId)) {
+            return transactions[i][0];
+        }
+    }
+    return null;
+ }
+
 }
 
