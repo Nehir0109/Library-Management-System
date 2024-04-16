@@ -98,6 +98,26 @@ public class LibraryManagementSystemApplication {
    }
 
 
+    static void updatePatronInfo(String fullName, String identityNumber, String email, String password){
+
+
+        int index = getPatronIndexByID(identityNumber);
+        if (index != -1){
+
+            patrons[index][1] = fullName;
+            patrons[index][2] = identityNumber;
+            patrons[index][3] = email;
+            patrons[index][4] = password;
+
+            System.out.println("Patron information updated successfully!");
+        }else {
+            System.out.println("Patron not found!!!");
+        }
+
+    }
+
+
+
     static void requestBook(String title, String author) {
         //int pageNumber = randomPage(); write the methods with your own algorithm
         // int ISBN = randomISBN();
@@ -154,6 +174,16 @@ public class LibraryManagementSystemApplication {
 
             System.out.println(ISBN+" book number updated!");
         }
+    }
+    static int getPatronIndexByID(String id){
+        int index = -1
+                for(int i = 0; i<patrons.length; i++){
+                    if (patrons[i][2].equals(id)){
+                        index = i;
+                        break;;
+                    }
+                }
+                return index;
     }
     static int getBookIndexByID(String ISBN){
         int foundIndex = -1;
