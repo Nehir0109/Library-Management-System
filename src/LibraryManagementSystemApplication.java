@@ -301,3 +301,37 @@ public class LibraryManagementSystemApplication {
     }
 }
 
+static String generateBookRecommendations(String patronId) {
+    String bookISBN = findBookISBNByPatronId()Id(patronId);
+    if (bookISBN == null) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(books.length);
+        return "Recommended Book for You:" + books[randomIndex][0] + "The author of the book: " + books[randomIndex][1];
+
+    } else {
+        String bookAuthor = "";
+        for (int i = 0; i < books.length; i++) {
+            if (books[i][2].equals(bookISBN)) {
+                bookAuthor = books[i][1];
+            }
+        }
+        System.out.println("Books Recommended for You: ");
+        for (int j = 0; j < books.length; j++) {
+            if (books[j][1].equals(bookAuthor)) {
+                return "Recommended Book for You:" + books[j][0] + "The author of the book: " + books[j][1];
+            }
+        }
+        return  "No books similar to your previous selections were found.";
+    }
+}
+
+private static String findBookISBNByPatronId(String patronId) {
+    for (int i = 0; i < transactions.length; i++) {
+        if (transactions[i][1].equals(patronId)) {
+            return transactions[i][0];
+        }
+    }
+    return null;
+}
+}
+
