@@ -299,6 +299,17 @@ public class LibraryManagementSystemApplication {
             System.out.println("You cannot borrow a new book without returning the book!");
         }
     }
+    static int invalidLoginCheck(String email, String password) {
+        for (int i=0; i<patronQuantity;i++){
+            if (patrons[i][2].equals(email) && patrons[i][3].equals(password)){
+                System.out.println("Login successful. You can proceed!");
+                return i;
+            }
+        }
+        System.out.println("Invalid login! Please check your email or password!");
+        return -1;
+    }
+
 }
 
 static String generateBookRecommendations(String patronId) {
