@@ -249,6 +249,7 @@ public class LibraryManagementSystemApplication {
         }
         if (isFound)
             response = "The book has borrowed. Good reading!";
+
         return response;
     }
 
@@ -300,6 +301,10 @@ public class LibraryManagementSystemApplication {
         }
     }
 
+    static String successMessage(String message){
+       String response = "The process has been completed : " + message;
+       return response;
+    }
 
     static void countTotalBooks() {
         System.out.print("Total number of books: " + quantity);
@@ -420,6 +425,7 @@ public class LibraryManagementSystemApplication {
             }
         }
         return null;
+
     }
 
 }
