@@ -199,9 +199,10 @@ public class LibraryManagementSystemApplication {
 
     static boolean checkBookReturnDeadline(String patronID) {
         boolean isLate = false;
-        for (String transaction[] : transactions) {
-            if (transaction[1].equalsIgnoreCase(patronID)) {
-                LocalDate dueDate = LocalDate.parse(transaction[2], DateTimeFormatter.ISO_DATE);
+        DateTimeFormatter dateString = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        for (String[] transaction: transactions) {
+            if (transaction[1] != null && transaction[1].equalsIgnoreCase(patronID)) {
+                LocalDate dueDate = LocalDate.parse(transaction[2], dateString);
                 LocalDate currentDate = LocalDate.now();
                 if (currentDate.isAfter(dueDate)) {
                     isLate = true;
