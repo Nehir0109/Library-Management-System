@@ -82,6 +82,14 @@ public class LibraryManagementSystemApplication {
         System.out.println("You have successfully added the book!");
     }
 
+    static boolean isBookAvailable(String ISBN) {
+        for (int i = 0; i < quantity; i++) {
+            if (books[i][2].equals(ISBN)) {
+                return true; // Kitap bulundu
+            }
+        }
+        return false; // Kitap bulunamadı
+    }
 
     static void extendBooksArrayOnAddition() {
         String[][] newBooks = new String[books.length + 1][4];
@@ -115,7 +123,6 @@ public class LibraryManagementSystemApplication {
         }
 
     }
-
 
     static void requestBook(String title, String author) {
         //int pageNumber = randomPage(); write the methods with your own algorithm
