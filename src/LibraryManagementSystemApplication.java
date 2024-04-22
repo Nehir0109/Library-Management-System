@@ -204,6 +204,31 @@ public class LibraryManagementSystemApplication {
         return foundIndex;
     }
 
+    //    Oruj - [JA-22] Check patron Eligibility start
+    static boolean checkPatronEligibilityForCheckout(String patronName) {
+        boolean isLate = false;
+        for (int i = transactionQuantity - 1; i >= 0; i--) {
+            if (transactions[i][1].equalsIgnoreCase(patronName)) {
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate dueDate = LocalDate.parse(transactions[i][2], dateFormatter);
+                LocalDate currentDate = LocalDate.now();
+                Period difference = Period.between(dueDate, currentDate);
+                if(difference.getDays()>15 )
+                {
+                    isLate=true;
+                    System.out.println("The return deadline of the borrowed book has passed 15 days. \n" +
+                            "You are not allowed to checkout a new one");
+                    break;
+                }
+            }
+        }
+        System.out.println("You can borrow a new book.");
+        return isLate;
+        //    isLate: TRUE - Döndüruyorsa User kitap alamaz!
+        //    FALSE - User kitap ala bilir.
+    }
+//   Oruj - [JA-22] Check patron Eligibility END
+
     static boolean checkBookReturnDeadline(String patronID) {
         boolean isLate = false;
         DateTimeFormatter dateString = DateTimeFormatter.ofPattern("dd/MM/yyyy");
