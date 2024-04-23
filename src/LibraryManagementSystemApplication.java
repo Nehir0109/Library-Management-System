@@ -9,9 +9,9 @@ public class LibraryManagementSystemApplication {
     static int quantity = 0;
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
-    static String[][] books = new String[INDEX][4];
-    static String[][] patrons = new String[INDEX][4];
-    static String[][] transactions = new String[INDEX][3];
+    static String[][] books = new String[INDEX][4]; // title, author, ISBN, pageNumber
+    static String[][] patrons = new String[INDEX][4]; // fullName, identityNumber, email, password
+    static String[][] transactions = new String[INDEX][3]; // ISBN, ID, date
 
     public static void main(String[] args) {
 
@@ -163,10 +163,10 @@ public class LibraryManagementSystemApplication {
         int index = getPatronIndexByID(identityNumber);
         if (index != -1) {
 
-            patrons[index][1] = fullName;
-            patrons[index][2] = identityNumber;
-            patrons[index][3] = email;
-            patrons[index][4] = password;
+            patrons[index][0] = fullName;
+            patrons[index][1] = identityNumber;
+            patrons[index][2] = email;
+            patrons[index][3] = password;
 
             System.out.println("Patron information updated successfully!");
         } else {
