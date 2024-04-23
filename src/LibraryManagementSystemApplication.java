@@ -18,7 +18,7 @@ public class LibraryManagementSystemApplication {
     }
 
     static void updateTransactionArray(){
-        // static void deleteUserInformation(String patronID) - Transactionlari silip truncate ediyor.
+        // static void deleteUserInformation(String patronID) - Transactionlari silip truncate ediyor transaction Arrayi'ni.
         //Bu methodu ise yer kalmadiginda arrayi INDEX kadar arttiriyor.
 
         if( transactionQuantity == transactions.length-1){// basta 99 sa artiriyoruz size i. Sonrasinda 199, 299.
@@ -32,6 +32,13 @@ public class LibraryManagementSystemApplication {
 
         // 2. deleteUserInformation(String patronID) - methodunda String [patronQuantity-1] doğru mu ?
         // INDEX kullanmamiz daha dogru mu
+
+        // 3. extendBooksArrayOnAddition() methodunda ->
+        //  String[][] newBooks = new String[books.length + 1][4];
+        // +1 degil +INDEX yapsak olur mu?
+
+        // 4. kitap silme ve ekleme, patron silme ve ekleme ve transaction silme var.
+        //   Sadece transaction eklemede arrayi guncelledim.
     }
     static void displayUpdatedArrays(){
         generateReports();
