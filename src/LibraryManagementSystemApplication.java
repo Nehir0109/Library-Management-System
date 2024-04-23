@@ -17,6 +17,50 @@ public class LibraryManagementSystemApplication {
 
     }
 
+    static void updateTransactionArray(){
+        // static void deleteUserInformation(String patronID) - Transactionlari silip truncate ediyor.
+        //Bu methodu ise yer kalmadiginda arrayi INDEX kadar arttiriyor.
+
+        if( transactionQuantity == transactions.length-1){// basta 99 sa artiriyoruz size i. Sonrasinda 199, 299.
+            String[][] newTransactions = new String[transactions.length + INDEX][3];
+            for(int i =0; i<transactionQuantity;i++){
+                newTransactions[i] = transactions[i];
+            }
+            transactions = newTransactions;
+        }
+        // 1. bu methodu check0utBook methodunda transactionlari eklemeden once kullanmamiz gerekir mi ?
+
+        // 2. deleteUserInformation(String patronID) - methodunda String [patronQuantity-1] doğru mu ?
+        // INDEX kullanmamiz daha dogru mu
+    }
+    static void displayUpdatedArrays(){
+        generateReports();
+        for(int i =0;i<patronQuantity;i++){
+            System.out.println("Patron Information: \n" +
+                    " User "+(i+1)+": \n"+
+                    "   Name & Surname: "+patrons[i][0] +
+                    "\n   Identity number: " +patrons[i][1]+
+                    "\n   Email: "+ patrons[i][2]+"\n");
+
+            String userTransactionsList = "";
+
+            for(int b=0;b<transactionQuantity;b++){
+                if(transactions[b][1].equalsIgnoreCase(patrons[i][1])) {
+                    userTransactionsList += "   Transaction No-"  + (b+1) +": \n"+
+                            "      Book Name: " + books[getBookIndexByID(transactions[b][0])][0] + "\n"+
+                            "      Book ISBN: " + transactions[b][0] + "\n"+
+                            "      User ID: "   + transactions[b][1] + "\n" +
+                            "      Checkout Date: " + transactions[b][2] + "\n";
+                }
+            }
+            if(userTransactionsList.isEmpty()){
+                userTransactionsList = " No transactions have been made.";
+            }
+            System.out.println("   "+patrons[i][0]+"'s transactions: \n" +  userTransactionsList);
+        }
+    }
+
+
     //    Oruj - [JA-07] Report generation start
     static void generateReports() {
         System.out.println("------------------Library Report------------------ \n" +
