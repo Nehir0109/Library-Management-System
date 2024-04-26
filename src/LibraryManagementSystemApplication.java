@@ -307,16 +307,16 @@ public class LibraryManagementSystemApplication {
         boolean isFound = false;
         String response = "ERROR: The book you are looking for can not be found!";
         for (String[] book : books) {
-            if (book[3].equals(bookISBN)) {
+            if (book[2].equals(bookISBN)) {
                 isFound = true;
 
                 LocalDate currentDate = LocalDate.now();
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String formattedDate = currentDate.format(dateFormatter);
 
-                transactions[quantity][0] = bookISBN;
-                transactions[quantity][1] = identityNumber;
-                transactions[quantity][2] = formattedDate;
+                transactions[transactionQuantity][0] = bookISBN;
+                transactions[transactionQuantity][1] = identityNumber;
+                transactions[transactionQuantity][2] = formattedDate;
                 transactionQuantity++;
 
                 truncateBooksArrayOnDeletion(bookISBN);
