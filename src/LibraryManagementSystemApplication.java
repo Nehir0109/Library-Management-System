@@ -172,10 +172,10 @@ static void userHints(){
         String email = scan.nextLine();
         System.out.println("Password:");
         String password = scan.nextLine();
-        for (INDEX=0;INDEX<patronQuantity;INDEX++){
-            if (patrons[INDEX][2].equalsIgnoreCase(email)&&patrons[INDEX][3].equalsIgnoreCase(password)){
+        for (int i=0;i<patronQuantity;i++){
+            if (patrons[i][2].equalsIgnoreCase(email)&&patrons[i][3].equalsIgnoreCase(password)){
                 System.out.println("Logged in successfully! You may continue your transactions!");
-                return INDEX;
+                return i;
             }
 
         }
@@ -215,7 +215,7 @@ static void userHints(){
                 case "1":
                     Scanner scanner1 = new Scanner(System.in);
                     System.out.println("Please Enter Book Title");
-                    String title = scanner1.nextLine();
+                    String title = scanner1.nextLine(); //todo: do not use numbers in variable names please
                     System.out.println("Please Enter Author");
                     String author = scanner1.nextLine();
                     System.out.println("Please Enter ISBN");
@@ -254,7 +254,8 @@ static void userHints(){
                     ISBN = scanner4.nextLine();
                     countTotalBooks();
 
-                    isBookAvailable(ISBN);
+                    isBookAvailable(ISBN); //todo: we don't need this method here
+                    // we should call a method that print out all the books
 
                     break;
 
