@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import java.util.Random;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ public class LibraryManagementSystemApplication {
     static String[][] transactions = new String[INDEX][3]; // ISBN, ID, date
 
     public static void main(String[] args) {
-
+        userHints();
     }
 
     static void updateTransactionArray(){
@@ -95,11 +96,11 @@ public class LibraryManagementSystemApplication {
 
     //    Oruj - [JA-07] Report generation END
 //    Oruj - [JA-24] Book reservation start
-    static void reserveBook(String patronID, String ISBN, int reservationTime) {
+    static void reserveBook(String patronId, String ISBN, int reservationTime) {
         int bookIndex = getBookIndexByID(ISBN);
         if (bookIndex != -1) {
             for (String[] patron : patrons) {
-                if (patron[1].equals(patronID)) {
+                if (patron[1].equals(patronId)) {
                     System.out.println("Reservation for " + books[bookIndex][0] +
                             "for " + reservationTime + " days is completed by " + patron[0]);
                     break;
@@ -110,17 +111,283 @@ public class LibraryManagementSystemApplication {
         }
     }
 //    Oruj - [JA-24] Book reservation End
+static void userHints(){
+    Scanner scan = new Scanner(System.in);
 
-    static String displayMenu() {
-        System.out.println("\n Welcome Library Management System");
-        System.out.println("1. Add/Edit Book");
-        System.out.println("2. Delete Book");
-        System.out.println("3. Add/Edit Patron");
-        System.out.println("4. Exit");
+    System.out.println("\nWelcome to Library System!");
+    System.out.println("To perform a transaction within the system, please select one of the following transactions!");
+    while (true){
 
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        System.out.println("Please choose your next step!");
+        System.out.println("1. Sign up");
+        System.out.println("2. Log in");
+        System.out.println("3. Exit");
+        System.out.println("Please enter your transaction!");
 
+        int choice = scan.nextInt();
+        scan.nextLine();
+        switch (choice){
+            case 1:
+                createPatronAccount(scan);
+                break;
+            case 2:
+                int loggedInPatronIndex = login(scan);
+                if (loggedInPatronIndex != -1){
+                    displayMenu(scan, loggedInPatronIndex);
+                }
+                break;
+            case 3:
+                System.out.println("Loggin off...");
+                System.exit(0);
+            default:
+                System.out.println("Incorrect e-mail or passowrd, Please try again!");
+
+
+        }
+    }
+
+}
+    static void createPatronAccount(Scanner scan){
+        System.out.println("Full Name:");
+        String fullName = scan.nextLine();
+        System.out.println("ID Number:");
+        String identityNumber = scan.nextLine();
+        System.out.println("E-mail:");
+        String email = scan.nextLine();
+        System.out.println("Password:");
+        String password = scan.nextLine();
+
+        patrons[patronQuantity][0] = fullName;
+        patrons[patronQuantity][1] = identityNumber;
+        patrons[patronQuantity][2] = email;
+        patrons[patronQuantity][3] = password;
+        patronQuantity++;
+
+        System.out.println("Your account has been created succesfully!");
+
+    }
+
+    static int login(Scanner scan){
+        System.out.println("E-mail:");
+        String email = scan.nextLine();
+        System.out.println("Password:");
+        String password = scan.nextLine();
+        for (INDEX=0;INDEX<patronQuantity;INDEX++){
+            if (patrons[INDEX][2].equalsIgnoreCase(email)&&patrons[INDEX][3].equalsIgnoreCase(password)){
+                System.out.println("Logged in successfully! You may continue your transactions!");
+                return INDEX;
+            }
+
+        }
+        System.out.println("Unvalid e-mail or password. Please try again!");
+        return -1;
+    }
+
+
+        static String displayMenu(Scanner scan, int loggedInPatronIndex) {
+
+            Scanner scanner = new Scanner(System.in);
+        while (true) {
+
+            System.out.println("\n Welcome Library Management System");
+            System.out.println("\n1. Add Book");
+            System.out.println("2. Update Book");
+            System.out.println("3. Delete Book");
+            System.out.println("4. Available Books");
+            System.out.println("5. Request Book");
+            System.out.println("6. Search Book");
+            System.out.println("7. Return Book");
+            System.out.println("8. Check Book Return Deadline");
+            System.out.println("9. Check Out Book");
+            System.out.println("10. Reserve Book");
+            System.out.println("11. Generate Book Recommendation");
+            System.out.println("12. Generate Reports");
+            System.out.println("13. Update User Info");
+            System.out.println("14. Check User Eligibility For Checkout");
+            System.out.println("15. Delete User Information");
+            System.out.println("16. Display Updated Arrays");
+            System.out.println("17. Exit");
+
+            System.out.println("Please Enter Your Transaction");
+            String choice = scanner.next();
+
+            switch (choice){
+                case "1":
+                    Scanner scanner1 = new Scanner(System.in);
+                    System.out.println("Please Enter Book Title");
+                    String title = scanner1.nextLine();
+                    System.out.println("Please Enter Author");
+                    String author = scanner1.nextLine();
+                    System.out.println("Please Enter ISBN");
+                    String ISBN = scanner1.nextLine();
+                    System.out.println("Please Enter Number Of Pages");
+                    String pageNumber = scanner1.nextLine();
+
+                    addBook(title, author, ISBN, pageNumber);
+                    break;
+                case "2":
+                    Scanner scanner2 = new Scanner(System.in);
+                    System.out.println("Please Enter ISBN");
+                    ISBN = scanner2.nextLine();
+                    System.out.println("Please Enter New Title Of The Book");
+                    String newTitle = scanner2.nextLine();
+                    System.out.println("Please Enter New Author");
+                    String newAuthor = scanner2.nextLine();
+                    System.out.println("Please Enter New Number Of Pages");
+                    String newPageNumber = scanner2.nextLine();
+
+                    updateBook(ISBN, newTitle, newAuthor, newPageNumber);
+
+                    break;
+                case "3":
+                    Scanner scanner3 = new Scanner(System.in);
+                    System.out.println("Please Enter ISBN Number");
+                    ISBN = scanner3.nextLine();
+
+                    deleteBook(ISBN);
+
+                    break;
+
+                case "4":
+                    Scanner scanner4 = new Scanner(System.in);
+                    System.out.println("Please Enter ISBN Number Of Book");
+                    ISBN = scanner4.nextLine();
+                    countTotalBooks();
+
+                    isBookAvailable(ISBN);
+
+                    break;
+
+                case "5":
+                    Scanner scanner5 = new Scanner(System.in);
+                    System.out.println("Please Enter Title Of The Book");
+                    title = scanner5.nextLine();
+                    System.out.println("Please Enter Author Of The Book");
+                    author = scanner5.nextLine();
+
+                    requestBook(title, author);
+
+                    break;
+
+                case "6":
+                   searchBooks();
+
+                   break;
+
+                case "7":
+                    Scanner scanner7 = new Scanner(System.in);
+                    System.out.println("Please Enter User ID");
+                    String patronId = scanner7.nextLine();
+                    System.out.println("Please Enter Title Of The Book");
+                    title = scanner7.nextLine();
+                    System.out.println("Please Enter Author Of The Book");
+                    author = scanner7.nextLine();
+                    System.out.println("Please Enter ISBN Number Of The Book");
+                    ISBN = scanner7.nextLine();
+                    System.out.println("Please Enter Number Of Pages");
+                    pageNumber = scanner7.nextLine();
+                    returnBook(patronId, title, author, ISBN, pageNumber);
+
+                    break;
+
+                case "8":
+                    Scanner scanner8 = new Scanner(System.in);
+                    System.out.println("Please Enter ID Of User");
+                    patronId = scanner8.nextLine();
+                    checkBookReturnDeadline(patronId);
+
+                    break;
+
+                case "9":
+                    Scanner scanner9 = new Scanner(System.in);
+                    System.out.println("Please Enter Id Number");
+                    String identityNumber = scanner9.nextLine();
+                    System.out.println("Please Enter Book Name");
+                    String bookName = scanner9.nextLine();
+                    System.out.println("Please Enter Book ISBN");
+                    String bookISBN = scanner9.nextLine();
+
+                    checkOutBook(identityNumber, bookName, bookISBN);
+
+                    break;
+
+                case "10":
+                    Scanner scanner10 = new Scanner(System.in);
+                    System.out.println("Please Enter User ID");
+                    patronId = scanner10.nextLine();
+                    System.out.println("Please Enter ISBN Number");
+                    ISBN = scanner10.nextLine();
+                    System.out.println("PLease Enter Reservation Time");
+                    int reservationTime = scanner10.nextInt();
+
+                    reserveBook(patronId, ISBN, reservationTime);
+
+                    break;
+
+                case "11":
+                    Scanner scanner11 = new Scanner(System.in);
+                    System.out.println("Please Enter User ID");
+                    patronId = scanner11.nextLine();
+
+                    generateBookRecommendations(patronId);
+
+                    break;
+
+                case"12":
+                    generateReports();
+                    break;
+
+                case "13":
+                    Scanner scanner13 = new Scanner(System.in);
+                    System.out.println("Please Enter Name Of The User");
+                    String fullName = scanner13.nextLine();
+                    System.out.println("Please Enter ID Number Of The User");
+                    identityNumber = scanner13.nextLine();
+                    System.out.println("Please Enter E-mail Of User");
+                    String email = scanner13.nextLine();
+                    System.out.println("Please Enter Password");
+                    String password = scanner13.nextLine();
+
+                    updatePatronInfo(fullName, identityNumber, email, password);
+
+                    break;
+
+                case "14":
+                    Scanner scanner14 = new Scanner(System.in);
+                    System.out.println("Please Enter User Name");
+                    String patronName = scanner14.nextLine();
+
+                    checkPatronEligibilityForCheckout(patronName);
+
+                    break;
+
+                case "15":
+                    Scanner scanner15 = new Scanner(System.in);
+                    System.out.println("Please Enter User ID Number");
+                    patronId = scanner15.nextLine();
+
+                    deleteUserInformation(patronId);
+
+                    break;
+
+                case "16":
+                    displayUpdatedArrays();
+
+                    break;
+
+                case "17":
+                    System.out.println("You Have Exit Library System. See You Next Time!!!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid Choice of Transaction! Please Try Again!");
+
+                    break;
+
+
+            }
+
+        }
     }
 
     static void addBook(String title, String author, String ISBN, String pageNumber) {
@@ -179,13 +446,16 @@ public class LibraryManagementSystemApplication {
     }
 
     static void requestBook(String title, String author) {
-        //int pageNumber = randomPage(); write the methods with your own algorithm
-        // int ISBN = randomISBN();
+        int pageNumber = (int) (Math.random()*(500 - 50+1)) + 50;
+        String ISBN = "ISBN -";
+        for (int i=0; i<13; i++){
+            ISBN += (int) (Math.random()-10);
+        }
         System.out.println("Kitap talebiniz tarafımızca alındı!");
         System.out.println("Kitap Adı:" + title);
         System.out.println("Yazar Adı:" + author);
-        System.out.println("Kitap Sayfa Sayısı:" + 0); // todo: this hard-coded value should be replaced with the actual page number
-        System.out.println("Kitap ISBN:" + 0);
+        System.out.println("Kitap Sayfa Sayısı:" + pageNumber); // todo: this hard-coded value should be replaced with the actual page number
+        System.out.println("Kitap ISBN:" + ISBN);
 
 
     }
@@ -283,11 +553,11 @@ public class LibraryManagementSystemApplication {
     }
 //   Oruj - [JA-22] Check patron Eligibility END
 
-    static boolean checkBookReturnDeadline(String patronID) {
+    static boolean checkBookReturnDeadline(String patronId) {
         boolean isLate = false;
         DateTimeFormatter dateString = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for (String[] transaction: transactions) {
-            if (transaction[1] != null && transaction[1].equalsIgnoreCase(patronID)) {
+            if (transaction[1] != null && transaction[1].equalsIgnoreCase(patronId)) {
                 LocalDate dueDate = LocalDate.parse(transaction[2], dateString);
                 LocalDate currentDate = LocalDate.now();
                 if (currentDate.isAfter(dueDate)) {
@@ -332,8 +602,8 @@ public class LibraryManagementSystemApplication {
         return response;
     }
 
-    static void deleteUserInformation(String patronID) {
-        int index = getPatronIndexByID(patronID);
+    static void deleteUserInformation(String patronId) {
+        int index = getPatronIndexByID(patronId);
         if (index == -1) {
             System.out.println("User not found!");
             return;
@@ -350,16 +620,16 @@ public class LibraryManagementSystemApplication {
         patrons = newPatrons;
         patronQuantity--;
 
-        cleanTransactionsByPatronID(patronID);
+        cleanTransactionsByPatronID(patronId);
 
         System.out.println("The user has been deleted successfully.");
     }
 
-    static void cleanTransactionsByPatronID(String patronID) {
+    static void cleanTransactionsByPatronID(String patronId) {
         String[][] newTransactions = new String[transactionQuantity - 1][2];
         int newIndex = 0;
         for (int i = 0; i < transactionQuantity; i++) {
-            if (transactions[i][1].equals(patronID)) {
+            if (transactions[i][1].equals(patronId)) {
                 continue;
             }
             newTransactions[newIndex] = transactions[i];
@@ -368,11 +638,11 @@ public class LibraryManagementSystemApplication {
         transactions = newTransactions;
         transactionQuantity--;
 
-        System.out.println("Transactions for the user with ID " + patronID + " have been cleaned successfully.");
+        System.out.println("Transactions for the user with ID " + patronId + " have been cleaned successfully.");
     }
 
-    static void returnBook(String patronID, String title, String author, String ISBN, String pageNumber) {
-        if (!checkBookReturnDeadline(patronID)) {
+    static void returnBook(String patronId, String title, String author, String ISBN, String pageNumber) {
+        if (!checkBookReturnDeadline(patronId)) {
             addBook(title, author, ISBN, pageNumber);
             System.out.println("The book was returned. The new book can be borrowed!");
         } else {
@@ -399,7 +669,7 @@ public class LibraryManagementSystemApplication {
         int choice = get.nextInt();
 
         System.out.print("Enter the word you are looking for: ");
-        String searchWord = get.nextLine();
+        String searchWord = get.next();
 
         switch (choice) {
             case 1:
