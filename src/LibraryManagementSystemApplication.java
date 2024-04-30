@@ -375,10 +375,15 @@ static void userHints(){
 
                     break;
 
+                case "17":
+                    System.out.println("You Have Exit Library System. See You Next Time!!!");
+                    System.exit(0);
+                    break;
                 default:
-                    System.out.println("Your Choice Of transaction İs İnvalid! Please Try Again!");
+                    System.out.println("Invalid Choice of Transaction! Please Try Again!");
 
                     break;
+
 
             }
 
