@@ -206,7 +206,7 @@ static void userHints(){
             System.out.println("14. Check User Eligibility For Checkout");
             System.out.println("15. Delete User Information");
             System.out.println("16. Display Updated Arrays");
-            System.out.println("18. Exit");
+            System.out.println("17. Exit");
 
             System.out.println("Please Enter Your Transaction");
             String choice = scanner.next();
