@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.Period;
 
 
 public class LibraryManagementSystemApplication {
@@ -123,6 +124,10 @@ public class LibraryManagementSystemApplication {
     }
 
     static void addBook(String title, String author, String ISBN, String pageNumber) {
+        if (quantity >= INDEX) {
+            extendBooksArrayOnAddition();
+        }
+
         books[quantity][0] = title;
         books[quantity][1] = author;
         books[quantity][2] = ISBN;
@@ -146,14 +151,12 @@ public class LibraryManagementSystemApplication {
         String[][] newBooks = new String[books.length + 1][4];
 
         for (int i = 0; i < books.length; i++) {
-            newBooks[i][0] = books[i][0];
-            newBooks[i][1] = books[i][1];
-            newBooks[i][2] = books[i][2];
-            newBooks[i][3] = books[i][3];
+            for (int j = 0; j < 4; j++) {
+                newBooks[i][j] = books[i][j];
+            }
         }
-        books = newBooks;
 
-        System.out.println("Book Has Been Added Successfully!");
+        books = newBooks;
     }
 
 
