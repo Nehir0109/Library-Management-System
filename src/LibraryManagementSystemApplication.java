@@ -415,6 +415,33 @@ static void userHints(){
         return false; // Kitap bulunamadı
     }
 
+    static void viewAvailableBooks() {
+        if (quantity == 0) {
+            System.out.println("No books are currently available in the library.");
+        } else {
+            System.out.println("\nList of Available Books:");
+            System.out.println("Title \t Author \t ISBN \t Page Number");
+            for (int i = 0; i < quantity; i++) {
+                System.out.println(books[i][0] + "\t" + books[i][1] + "\t" + books[i][2] + "\t" + books[i][3]);
+            }
+        }
+    }
+    static void viewBookDetails() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the ISBN number of the book you want to view:");
+        String isbn = scanner.nextLine();
+
+        int index = getBookIndexByID(isbn);
+        if (index != -1) {
+            System.out.println("Book name: " + books[index][0]);
+            System.out.println("Author name: " + books[index][1]);
+            System.out.println("ISBN: " + books[index][2]);
+            System.out.println("Number of pages: " + books[index][3]);
+        } else {
+            System.out.println("No book with the entered ISBN number was found!");
+        }
+    }
+
     static void extendBooksArrayOnAddition() {
         String[][] newBooks = new String[books.length + 1][4];
 
@@ -457,7 +484,6 @@ static void userHints(){
         System.out.println("Yazar Adı:" + author);
         System.out.println("Kitap Sayfa Sayısı:" + pageNumber); // todo: this hard-coded value should be replaced with the actual page number
         System.out.println("Kitap ISBN:" + ISBN);
-
 
     }
 
