@@ -185,7 +185,7 @@ static void userHints(){
 
     static String displayMenu(int loggedInPatronIndex) {
 
-        System.out.println("\n Welcome Library Management System");
+        System.out.println("\n Welcome to Library Management System");
         String patronID = patrons[loggedInPatronIndex][1];
         String patronName = patrons[loggedInPatronIndex][0];
 
