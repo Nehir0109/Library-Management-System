@@ -292,7 +292,8 @@ static void userHints(){
                     System.out.println("Please Enter Book ISBN");
                     String bookISBN = scanner.next();
 
-                    checkOutBook(patronID, bookName, bookISBN);
+                    String checkoutResponse = checkOutBook(patronID, bookName, bookISBN);
+                    System.out.println(checkoutResponse);
 
                     break;
 
@@ -575,7 +576,7 @@ static void userHints(){
         boolean isFound = false;
         String response = "ERROR: The book you are looking for can not be found!";
         for (String[] book : books) {
-            if (book[2].equals(bookISBN)) {
+            if (book != null && book[2] != null && book[2].equals(bookISBN)) { // Check for null before equals
                 isFound = true;
 
                 LocalDate currentDate = LocalDate.now();
@@ -587,7 +588,6 @@ static void userHints(){
                 transactions[transactionQuantity][2] = formattedDate;
                 transactionQuantity++;
 
-                truncateBooksArrayOnDeletion(bookISBN);
                 break;
             }
         }
