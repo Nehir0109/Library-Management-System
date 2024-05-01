@@ -396,18 +396,23 @@ static void userHints(){
         }
     }
     static void viewBookDetails() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the ISBN number of the book you want to view:");
-        String isbn = scanner.nextLine();
-
-        int index = getBookIndexByID(isbn);
-        if (index != -1) {
-            System.out.println("Book name: " + books[index][0]);
-            System.out.println("Author name: " + books[index][1]);
-            System.out.println("ISBN: " + books[index][2]);
-            System.out.println("Number of pages: " + books[index][3]);
+        if (quantity == 0) {
+            System.out.println("No books are currently available in the library.");
         } else {
-            System.out.println("No book with the entered ISBN number was found!");
+            System.out.println("\nList of Available Books:");
+            System.out.println("\n Total Number Of Books: " + quantity);
+            System.out.println();
+            System.out.println("Title \t\t\t Author \t\t ISBN \t\t Page Number");
+
+            for (int i = 0; i < quantity; i++) {
+                System.out.print(books[i][0] + "\t\t\t" + books[i][1] + "\t\t\t" + books[i][2] + "\t\t\t" + books[i][3]);
+
+                if ((i + 1) % 5 == 0 || i == quantity - 1) {
+                    System.out.println();
+                } else {
+                    System.out.print("\t\t");
+                }
+            }
         }
     }
 
