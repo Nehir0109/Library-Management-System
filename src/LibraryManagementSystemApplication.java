@@ -182,7 +182,7 @@ static void userHints(){
     }
 
 
-    static String displayMenu(int loggedInPatronIndex) {
+    static void displayMenu(int loggedInPatronIndex) {
 
         System.out.println("\n Welcome to Library Management System");
         String patronID = patrons[loggedInPatronIndex][1];
@@ -307,7 +307,8 @@ static void userHints(){
                     break;
 
                 case "11":
-                    generateBookRecommendations(patronID);
+                    String response = generateBookRecommendations(patronID);
+                    System.out.println(response);
 
                     break;
 
