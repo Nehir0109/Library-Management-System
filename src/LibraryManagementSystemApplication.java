@@ -209,22 +209,23 @@ static void userHints(){
             System.out.println("17. Exit");
 
             System.out.println("Please Enter Your Transaction");
-            String choice = scanner.next();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice){
-                case "1":
+                case 1:
                     System.out.println("Please Enter Book Title");
-                    String title = scanner.next(); //todo: do not use numbers in variable names please
+                    String title = scanner.nextLine(); //todo: do not use numbers in variable names please
                     System.out.println("Please Enter Author");
-                    String author = scanner.next();
+                    String author = scanner.nextLine();
                     System.out.println("Please Enter ISBN");
-                    String ISBN = scanner.next();
+                    String ISBN = scanner.nextLine();
                     System.out.println("Please Enter Number Of Pages");
-                    String pageNumber = scanner.next();
+                    String pageNumber = scanner.nextLine();
 
                     addBook(title, author, ISBN, pageNumber);
                     break;
-                case "2":
+                case 2:
                     System.out.println("Please Enter ISBN");
                     String newISBN = scanner.next();
                     System.out.println("Please Enter New Title Of The Book");
@@ -238,7 +239,7 @@ static void userHints(){
                     updateBook(newISBN, newTitle, newAuthor, newPageNumber);
 
                     break;
-                case "3":
+                case 3:
                     System.out.println("Please Enter ISBN Number");
                     ISBN = scanner.next();
 
@@ -246,13 +247,13 @@ static void userHints(){
 
                     break;
 
-                case "4":
+                case 4:
                     countTotalBooks();
                     viewAvailableBooks();
 
                     break;
 
-                case "5":
+                case 5:
                     System.out.println("Please Enter Title Of The Book");
                     title = scanner.next();
                     System.out.println("Please Enter Author Of The Book");
@@ -262,12 +263,12 @@ static void userHints(){
 
                     break;
 
-                case "6":
+                case 6:
                    searchBooks();
 
                    break;
 
-                case "7":
+                case 7:
                     System.out.println("Please Enter Title Of The Book");
                     title = scanner.next();
                     System.out.println("Please Enter Author Of The Book");
@@ -280,12 +281,12 @@ static void userHints(){
 
                     break;
 
-                case "8":
+                case 8:
                     checkBookReturnDeadline(patronID);
 
                     break;
 
-                case "9":
+                case 9:
                     System.out.println("Please Enter Book Name");
                     String bookName = scanner.next();
                     System.out.println("Please Enter Book ISBN");
@@ -296,7 +297,7 @@ static void userHints(){
 
                     break;
 
-                case "10":
+                case 10:
                     System.out.println("Please Enter ISBN Number");
                     ISBN = scanner.next();
                     System.out.println("PLease Enter Reservation Time");
@@ -306,17 +307,17 @@ static void userHints(){
 
                     break;
 
-                case "11":
+                case 11:
                     String response = generateBookRecommendations(patronID);
                     System.out.println(response);
 
                     break;
 
-                case"12":
+                case 12:
                     generateReports();
                     break;
 
-                case "13":
+                case 13:
                     System.out.println("Please Enter Name Of The User");
                     String fullName = scanner.next();
                     System.out.println("Please Enter ID Number Of The User");
@@ -330,22 +331,22 @@ static void userHints(){
 
                     break;
 
-                case "14":
+                case 14:
                     checkPatronEligibilityForCheckout(patronName);
 
                     break;
 
-                case "15":
+                case 15:
                     deleteUserInformation(patronID);
 
                     break;
 
-                case "16":
+                case 16:
                     displayUpdatedArrays();
 
                     break;
 
-                case "17":
+                case 17:
                     System.out.println("You Have Exit Library System. See You Next Time!!!");
                     System.exit(0);
                     break;
