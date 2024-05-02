@@ -175,9 +175,8 @@ static void userHints(){
         if (index!=-1){
             System.out.println("Logged in successfully! You may continue your transactions!");
             return index;
-        }else{
-            System.out.println("Unvalid e-mail or password. Please try again!");
         }
+
 
         return -1;
     }
@@ -405,7 +404,7 @@ static void userHints(){
             System.out.println("Title \t\t\t Author \t\t ISBN \t\t Page Number");
 
             for (int i = 0; i < quantity; i++) {
-                System.out.print(books[i][0] + "\t\t\t" + books[i][1] + "\t\t\t" + books[i][2] + "\t\t\t" + books[i][3]);
+                System.out.print(books[i][0] + "\t\t\t\t" + books[i][1] + "\t\t\t\t" + books[i][2] + "\t\t\t\t" + books[i][3]);
 
                 if ((i + 1) % 5 == 0 || i == quantity - 1) {
                     System.out.println();
