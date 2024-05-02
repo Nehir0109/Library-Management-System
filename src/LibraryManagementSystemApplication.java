@@ -450,12 +450,12 @@ static void userHints(){
         int pageNumber = (int) (Math.random()*(500 - 50+1)) + 50;
         String ISBN = "ISBN -";
         for (int i=0; i<13; i++){
-            ISBN += (int) (Math.random()-10);
+            ISBN += (int) (Math.random() * 10);
         }
         System.out.println("Kitap talebiniz tarafımızca alındı!");
         System.out.println("Kitap Adı:" + title);
         System.out.println("Yazar Adı:" + author);
-        System.out.println("Kitap Sayfa Sayısı:" + pageNumber); // todo: this hard-coded value should be replaced with the actual page number
+        System.out.println("Kitap Sayfa Sayısı:" + pageNumber);
         System.out.println("Kitap ISBN:" + ISBN);
 
     }
