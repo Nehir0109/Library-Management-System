@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -756,7 +757,7 @@ static void userHints(){
 
     static String generateBookRecommendations(String patronId) {
         String bookISBN = findBookISBNByPatronId(patronId);
-        if (bookISBN == "-1") {
+        if (Objects.equals(bookISBN, "-1")) {
             Random random = new Random();
             int randomIndex = random.nextInt(quantity);
             String recommendedBookName = books[randomIndex][0];
@@ -765,13 +766,13 @@ static void userHints(){
 
         } else {
             String bookAuthor = "";
-            for (int i = 0; i < books.length; i++) {
+            for (int i = 0; i < quantity; i++) {
                 if (books[i][2].equals(bookISBN)) {
                     bookAuthor = books[i][1];
                 }
             }
             System.out.println("Books Recommended for You: ");
-            for (int j = 0; j < books.length; j++) {
+            for (int j = 0; j < quantity; j++) {
                 if (books[j][1].equals(bookAuthor)) {
                     return "Recommended Book for You:" + books[j][0] + "The author of the book: " + books[j][1];
                 }
@@ -781,7 +782,7 @@ static void userHints(){
     }
 
     private static String findBookISBNByPatronId(String patronId) {
-        for (int i = 0; i < transactions.length; i++) {
+        for (int i = 0; i < quantity; i++) {
             if (transactions[i] != null && transactions[i][1] != null && transactions[i][1].equals(patronId)) {
                 return transactions[i][0];
             }
