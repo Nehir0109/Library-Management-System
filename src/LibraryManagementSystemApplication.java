@@ -750,10 +750,10 @@ static void userHints(){
 
     static String generateBookRecommendations(String patronId) {
         String bookISBN = findBookISBNByPatronId(patronId);
-        if (bookISBN == null) {
+        if (bookISBN == "-1") {
             Random random = new Random();
             int randomIndex = random.nextInt(books.length);
-            return "Recommended Book for You:" + books[randomIndex][0] + "The author of the book: " + books[randomIndex][1];
+            return "Recommended Book for You: " + books[randomIndex][0] + "\nThe author of the book: " + books[randomIndex][1];
 
         } else {
             String bookAuthor = "";
@@ -774,11 +774,11 @@ static void userHints(){
 
     private static String findBookISBNByPatronId(String patronId) {
         for (int i = 0; i < transactions.length; i++) {
-            if (transactions[i][1].equals(patronId)) {
+            if (transactions[i] != null && transactions[i][1] != null && transactions[i][1].equals(patronId)) {
                 return transactions[i][0];
             }
         }
-        return null;
+        return "-1";
 
     }
 
