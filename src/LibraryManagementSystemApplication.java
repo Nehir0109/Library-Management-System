@@ -111,41 +111,44 @@ public class LibraryManagementSystemApplication {
         }
     }
 //    Oruj - [JA-24] Book reservation End
-static void userHints(){
+static void userHints() {
     Scanner scan = new Scanner(System.in);
 
     System.out.println("\nWelcome to Library System!");
     System.out.println("To perform a transaction within the system, please select one of the following transactions!");
-    while (true){
+    while (true) {
+        int choice;
 
-        System.out.println("Please choose your next step!");
-        System.out.println("1. Sign up");
-        System.out.println("2. Log in");
-        System.out.println("3. Exit");
-        System.out.println("Please enter your transaction!");
+        do {
+            System.out.println("Please choose your next step!");
+            System.out.println("1. Sign up");
+            System.out.println("2. Log in");
+            System.out.println("3. Exit");
+            System.out.println("Please enter your transaction!");
 
-        int choice = scan.nextInt();
-        scan.nextLine();
-        switch (choice){
+            while (!scan.hasNextInt()) {
+                scan.nextLine();
+                System.out.print("Invalid input. Please try again! (1,2 or 3): ");
+            }
+            choice = scan.nextInt();
+            scan.nextLine();
+        } while (choice < 1 || choice > 3);
+
+        switch (choice) {
             case 1:
                 createPatronAccount(scan);
                 break;
             case 2:
                 int loggedInPatronIndex = login(scan);
-                if (loggedInPatronIndex != -1){
+                if (loggedInPatronIndex != -1) {
                     displayMenu(scan, loggedInPatronIndex);
                 }
                 break;
             case 3:
                 System.out.println("Loggin off...");
                 System.exit(0);
-            default:
-                System.out.println("Incorrect e-mail or passowrd, Please try again!");
-
-
         }
     }
-
 }
     static void createPatronAccount(Scanner scan){
         System.out.println("Full Name:");
