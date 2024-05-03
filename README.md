@@ -37,23 +37,23 @@ These additional features can further enhance the functionality and user experie
 
 ## Usage
 
-### Sign-in: 
-To access the system, users need to sign in or create a new account.
+1. Sign-in:
+   To access the system, users need to sign in or create a new account.
 
-### Main Menu: 
-Upon successful sign-in, users are presented with a main menu containing various options.
+2. Main Menu:
+   Upon successful sign-in, users are presented with a main menu containing various options.
 
-### Book Operations:
-Users can perform several actions related to books, including adding, deleting, searching, and viewing available books.
+3. Book Operations:
+   Users can perform several actions related to books, including adding, deleting, searching, and viewing available books.
 
-### Check Out and Return:
-Users can utilize this feature to check out or return books. The system automatically checks for overdue returns.
+4. Check Out and Return:
+   Users can utilize this feature to check out or return books. The system automatically checks for overdue returns.
 
-### Account Management:
-Users have the option to update their personal information or delete their accounts from the system.
+5. Account Management:
+   Users have the option to update their personal information or delete their accounts from the system.
 
-### Reporting:
-Generate reports regarding the library's inventory and other relevant data.
+6. Reporting:
+   Generate reports regarding the library's inventory and other relevant data.
 
 ## Installation
 
