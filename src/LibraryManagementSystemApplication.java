@@ -117,40 +117,46 @@ public class LibraryManagementSystemApplication {
         }
     }
 //    Oruj - [JA-24] Book reservation End
+
 static void userHints(){
 
     System.out.println("\nWelcome to Library System!");
     System.out.println("To perform a transaction within the system, please select one of the following transactions!");
-    while (true){
+    while (true) {
+        int choice;
 
-        System.out.println("Please choose your next step!");
-        System.out.println("1. Sign up");
-        System.out.println("2. Log in");
-        System.out.println("3. Exit");
-        System.out.println("Please enter your transaction!");
+        do {
+            System.out.println("Please choose your next step!");
+            System.out.println("1. Sign up");
+            System.out.println("2. Log in");
+            System.out.println("3. Exit");
+            System.out.println("Please enter your transaction!");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-        switch (choice){
+            while (!scanner.hasNextInt()) {
+                scanner.nextLine();
+                System.out.print("Invalid input. Please try again! (1,2 or 3): ");
+            }
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
+        } while (choice < 1 || choice > 3);
+
+        switch (choice) {
             case 1:
                 createPatronAccount();
                 break;
             case 2:
+
                 int loggedInPatronIndex = login();
-                if (loggedInPatronIndex != -1){
+                if (loggedInPatronIndex != -1) {
                     displayMenu(loggedInPatronIndex);
                 }
                 break;
             case 3:
                 System.out.println("Loggin off...");
                 System.exit(0);
-            default:
-                System.out.println("Incorrect e-mail or passowrd, Please try again!");
-
-
         }
     }
-
 }
     static void createPatronAccount(){
         System.out.println("Full Name:");
