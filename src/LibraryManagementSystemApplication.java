@@ -101,6 +101,11 @@ public class LibraryManagementSystemApplication {
         if (bookIndex != -1) {
             for (String[] patron : patrons) {
                 if (patron[1].equals(patronId)) {
+                    transactions[transactionQuantity][0] = ISBN;
+                    transactions[transactionQuantity][1] = patronId;
+                    transactions[transactionQuantity][2] = LocalDate.now().toString();
+                    transactionQuantity++;
+
                     System.out.println("Reservation for " + books[bookIndex][0] +
                             "for " + reservationTime + " days is completed by " + patron[0]);
                     break;
