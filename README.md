@@ -21,7 +21,7 @@ The system provides personalized book recommendations based on users' transactio
 ### Reporting:
 The system generates detailed reports on the library's inventory. Users can access reports containing information such as the total number of books in the library.
 
-### Additional Features (Optional):
+### Additional Features:
 1. Book Recommendations Based on Transaction History:
 Providing recommendations based on the books users have previously borrowed can enhance the user experience and assist users in selecting books according to their interests.
 2. List of Available Books for Checkout:
