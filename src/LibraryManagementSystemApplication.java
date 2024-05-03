@@ -116,6 +116,7 @@ public class LibraryManagementSystemApplication {
         }
     }
 //    Oruj - [JA-24] Book reservation End
+
 static void userHints(){
 
     System.out.println("\nWelcome to Library System!");
@@ -136,6 +137,7 @@ static void userHints(){
             }
             choice = scanner.nextInt();
             scanner.nextLine();
+
         } while (choice < 1 || choice > 3);
 
         switch (choice) {
@@ -143,6 +145,7 @@ static void userHints(){
                 createPatronAccount();
                 break;
             case 2:
+
                 int loggedInPatronIndex = login();
                 if (loggedInPatronIndex != -1) {
                     displayMenu(loggedInPatronIndex);
@@ -153,7 +156,6 @@ static void userHints(){
                 System.exit(0);
         }
     }
-
 }
     static void createPatronAccount(){
         System.out.println("Full Name:");
