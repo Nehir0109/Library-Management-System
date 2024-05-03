@@ -752,8 +752,10 @@ static void userHints(){
         String bookISBN = findBookISBNByPatronId(patronId);
         if (bookISBN == "-1") {
             Random random = new Random();
-            int randomIndex = random.nextInt(books.length);
-            return "Recommended Book for You: " + books[randomIndex][0] + "\nThe author of the book: " + books[randomIndex][1];
+            int randomIndex = random.nextInt(quantity);
+            String recommendedBookName = books[randomIndex][0];
+            String recommendedBookAuthor = books[randomIndex][1];
+            return "Recommended Book for You: " + recommendedBookName + "\nThe author of the book: " + recommendedBookAuthor;
 
         } else {
             String bookAuthor = "";
