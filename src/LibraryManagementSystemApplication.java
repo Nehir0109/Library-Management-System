@@ -515,8 +515,8 @@ static void userHints(){
 
     static int getPatronIndexByID(String id) {
         int index = -1;
-        for (int i = 0; i < patrons.length; i++) {
-            if (patrons[i][2].equals(id)) {
+        for (int i = 0; i < patronQuantity; i++) {
+            if (patrons[i] != null && patrons[i][1].equals(id)) {
                 index = i;
                 break;
             }
