@@ -107,8 +107,7 @@ public class LibraryManagementSystemApplication {
                     transactions[transactionQuantity][2] = LocalDate.now().toString();
                     transactionQuantity++;
 
-                    System.out.println("Reservation for " + books[bookIndex][0] +
-                            "for " + reservationTime + " days is completed by " + patron[0]);
+                    System.out.println("Reservation for " + books[bookIndex][0] + " for " + reservationTime + " days is completed by " + patron[0]);
                     break;
                 }
             }
@@ -249,6 +248,7 @@ static void userHints(){
                     String newPageNumber = scanner.next();
 
                     updateBook(newISBN, newTitle, newAuthor, newPageNumber);
+
 
                     break;
                 case 3:
@@ -466,11 +466,11 @@ static void userHints(){
         for (int i=0; i<13; i++){
             ISBN += (int) (Math.random() * 10);
         }
-        System.out.println("Kitap talebiniz tarafımızca alındı!");
-        System.out.println("Kitap Adı:" + title);
-        System.out.println("Yazar Adı:" + author);
-        System.out.println("Kitap Sayfa Sayısı:" + pageNumber);
-        System.out.println("Kitap ISBN:" + ISBN);
+        System.out.println("Your request has been received by us!");
+        System.out.println("Book:" + title);
+        System.out.println("Author:" + author);
+        System.out.println("Number of pages:" + pageNumber);
+        System.out.println("Book ISBN:" + ISBN);
 
     }
 
